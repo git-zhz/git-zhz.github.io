@@ -88,65 +88,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h2><h3 id="1-安装程序"><a href="#1-安装程序" class="headerlink" title="1.安装程序"></a>1.安装程序</h3><p>1.安装<code>node.js</code>,<code>git</code>：官网下载最新版即可</p>
-<p>检查版本：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br><span class="line">git --version</span><br></pre></td></tr></table></figure>
-
-<p>2.安装hexo(win+r  cmd)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm insatll -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-GitHub"><a href="#2-GitHub" class="headerlink" title="2.GitHub"></a>2.GitHub</h3><p>1.注册（用户名，邮箱，密码）</p>
-<p>2.创建一个名为 <code>用户名.github.io</code> 的仓库，当你博客搭建成功时，域名就为 <code>https://用户名.github.io</code></p>
-<p>3.配置ssh key</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;邮箱&quot;</span><br></pre></td></tr></table></figure>
-
-<p>回车，第一个不用填，然后定义上传密码，也可以不填。</p>
-<p>打开电脑用户目录下的<code>.ssh\id_rsa.pub</code>文件，复制里面所有内容。</p>
-<p>打开GitHub主页，点头像，进入setting-&gt;SSH and GPG keys-&gt;New SSH key。</p>
-<p>粘贴你复制的内容到key里面，title随便填。</p>
-<p>4.测试连接</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-
-<p>5.配置信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global uesr.name &quot;用户名&quot;</span><br><span class="line">git config --global user.email &quot;邮箱&quot;</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-生成博客"><a href="#3-生成博客" class="headerlink" title="3.生成博客"></a>3.生成博客</h3><p>1.新建一个空文件夹，此文件夹为存放你博客的内容</p>
-<p>2.初始化</p>
-<p>进入此文件夹，鼠标右键<code>Git Bash Here</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
-
-<p>3.生成</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
-
-<p>4.启动服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-
-<p>浏览器输入<code>localhost:40000</code>可本地查看你的博客，<code>ctrl+C</code>结束服务。</p>
-<h3 id="4-部署"><a href="#4-部署" class="headerlink" title="4.部署"></a>4.部署</h3><p>1.安装插件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<p>2.修改配置信息</p>
-<p>打开此文件夹下<code>_config.yml</code>,配置drploy部分</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#注意前面每一个：后面有一个空格</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">	<span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">	<span class="attr">repository:</span> <span class="string">git@github.com:用户名/用户名.github.io.git</span></span><br><span class="line">	<span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
-
-<p>3.上传</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-
-<h2 id="错误："><a href="#错误：" class="headerlink" title="错误："></a>错误：</h2><p>1.安装插件<code>hexo-deployer-git</code>后，输入任意hexo指令出现：<code>RROR Plugin load failed: hexo-deployer-git</code></p>
-<p>原因：<code>node.js</code>版本太低，不支持该语法。安装高版本nodejs解决问题。</p>
-<p>2.<code>hexo d</code> 上传到GitHub上的库时出现：<code>fatal: Could not read from remote repository.</code></p>
-<p>原因：config.yml文件配置有误，正确格式为：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repository:</span> <span class="string">git@github.com:username/username.github.io.git</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="新建文章："><a href="#新建文章：" class="headerlink" title="新建文章："></a>新建文章：</h2><p>在此文件夹下</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &lt;title&gt;</span><br></pre></td></tr></table></figure>
-
-<p>会在source目录下生成md文件，打开这个文件就能编写博客内容了。</p>
-
+        <p>使用github pages服务搭建博客的好处有：</p>
+<p>1.全是静态文件，访问速度快；<br>2.免费方便，不用花一分钱就可以搭建一个自由的个人博客，不需要服务器不需要后台；<br>3.可以随意绑定自己的域名，不仔细看的话根本看不出来你的网站是基于github的；<br>4.数据绝对安全，基于github的版本管理，想恢复到哪个历史版本都行；<br>5.博客内容可以轻松打包、转移、发布到其它平台；</p>
+        
+          <p class="article-more-link">
+            <a href="/2019/09/20/Hexo+Github搭建个人博客/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/20/Hexo+Github搭建个人博客/" data-id="ck0tbr6ff0000l8v915vr0a45" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/20/Hexo+Github搭建个人博客/" data-id="ck0urakum0000v0v9d5a9zsak" class="article-share-link">Share</a>
       
       
     </footer>
@@ -180,16 +132,15 @@
       
         <h3 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h3><p>IOC（Inversion Of Controll，控制反转）是一种设计思想，将原本在程序中手动创建对象的控制权，交由给Spring框架来管理。IOC容器是Spring用来实现IOC的载体，IOC容器实际上就是一个Map(key, value)，Map中存放的是各种对象。</p>
 <p>这样可以很大程度上简化应用的开发，把应用从复杂的依赖关系中解放出来。IOC容器就像是一个工厂，当需要创建一个对象，只需要配置好配置文件/注解即可，不用考虑对象是如何被创建出来的，大大增加了项目的可维护性且降低了开发难度。</p>
-<h3 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h3><p>AOP（Aspect-Oriented Programming，面向切面编程）能够将那些与业务无关，却为业务模块所共同调用的逻辑或责任（例如事务处理、日志管理、权限控制等）封装起来，便于减少系统的重复代码，降低模块间的耦合度，并有利于未来的可扩展性和可维护性。使用AOP之后我们可以把一些通用功能抽象出来，在需要用到的地方直接使用即可，这样可以大大简化代码量，提高了系统的扩展性。</p>
-<p>Spring AOP是基于动态代理的，如果要代理的对象实现了某个接口，那么Spring AOP就会使用JDK动态代理去创建代理对象；而对于没有实现接口的对象，就无法使用JDK动态代理，转而使用CGlib动态代理生成一个被代理对象的子类来作为代理。</p>
-<h3 id="Spring-AOP-AspectJ-AOP-的区别？"><a href="#Spring-AOP-AspectJ-AOP-的区别？" class="headerlink" title="Spring AOP / AspectJ AOP 的区别？"></a>Spring AOP / AspectJ AOP 的区别？</h3><p>Spring AOP属于运行时增强，而AspectJ是编译时增强。</p>
-<p>Spring AOP基于代理（Proxying），而AspectJ基于字节码操作（Bytecode Manipulation）。</p>
-<p>AspectJ相比于Spring AOP功能更加强大，但是Spring AOP相对来说更简单。如果切面比较少，那么两者性能差异不大。但是，当切面太多的话，最好选择AspectJ，它比SpringAOP快很多。</p>
-
+        
+          <p class="article-more-link">
+            <a href="/2019/09/19/spring/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/19/spring/" data-id="ck0tbr6g20002l8v9vn5hfpsx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/19/spring/" data-id="ck0urakut0001v0v9vmntg5ii" class="article-share-link">Share</a>
       
       
     </footer>
@@ -222,23 +173,15 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+        
+          <p class="article-more-link">
+            <a href="/2019/09/13/hello-world/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/13/hello-world/" data-id="ck0tbr6fz0001l8v9uv29y1v0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/13/hello-world/" data-id="ck0urakuw0002v0v9wgkmbum2" class="article-share-link">Share</a>
       
       
     </footer>
