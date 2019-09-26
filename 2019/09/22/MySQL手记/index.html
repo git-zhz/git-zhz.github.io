@@ -7,17 +7,17 @@
   
   <title>MySQL手记 | 做一个傻子多么好</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.基础 1.规范化 2.数据库引擎   2.数据库 3.表 1.字段类型 2.索引* 3.约束 4.主键   4.CURD 5.查询 1.条件 运算符 通配符 关键字   2.聚合函数 3.连接查询 内连接 外连接 全外连接   4.子查询 5.合并查询结果 6.正则表达式 7.视图   14.存储过程和存储函数 15.触发器* 16.事件 17.备份与恢复 18.性能优化 1.分解表">
+  <meta name="description" content="1.基础1.规范化第一范式：无重复字段，各字段为最小的逻辑存储单位 第二范式：if belong 1NF，每一个其他字段完全依赖主键 第三范式：if belong 1NF,2NF，去除传递依赖 2.数据库引擎默认：InnoDB 其他：MyISAM等">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL手记">
 <meta property="og:url" content="http://yoursite.com/2019/09/22/MySQL手记/index.html">
 <meta property="og:site_name" content="做一个傻子多么好">
-<meta property="og:description" content="1.基础 1.规范化 2.数据库引擎   2.数据库 3.表 1.字段类型 2.索引* 3.约束 4.主键   4.CURD 5.查询 1.条件 运算符 通配符 关键字   2.聚合函数 3.连接查询 内连接 外连接 全外连接   4.子查询 5.合并查询结果 6.正则表达式 7.视图   14.存储过程和存储函数 15.触发器* 16.事件 17.备份与恢复 18.性能优化 1.分解表">
+<meta property="og:description" content="1.基础1.规范化第一范式：无重复字段，各字段为最小的逻辑存储单位 第二范式：if belong 1NF，每一个其他字段完全依赖主键 第三范式：if belong 1NF,2NF，去除传递依赖 2.数据库引擎默认：InnoDB 其他：MyISAM等">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-26T06:18:06.268Z">
+<meta property="og:updated_time" content="2019-09-26T07:52:51.790Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL手记">
-<meta name="twitter:description" content="1.基础 1.规范化 2.数据库引擎   2.数据库 3.表 1.字段类型 2.索引* 3.约束 4.主键   4.CURD 5.查询 1.条件 运算符 通配符 关键字   2.聚合函数 3.连接查询 内连接 外连接 全外连接   4.子查询 5.合并查询结果 6.正则表达式 7.视图   14.存储过程和存储函数 15.触发器* 16.事件 17.备份与恢复 18.性能优化 1.分解表">
+<meta name="twitter:description" content="1.基础1.规范化第一范式：无重复字段，各字段为最小的逻辑存储单位 第二范式：if belong 1NF，每一个其他字段完全依赖主键 第三范式：if belong 1NF,2NF，去除传递依赖 2.数据库引擎默认：InnoDB 其他：MyISAM等">
   
     <link rel="alternate" href="/atom.xml" title="做一个傻子多么好" type="application/atom+xml">
   
@@ -90,16 +90,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <div class="toc">
+        <h2><span id="1-ji-chu">1.基础</span><a href="#1-ji-chu" class="header-anchor">#</a></h2><h3><span id="1-gui-fan-hua">1.规范化</span><a href="#1-gui-fan-hua" class="header-anchor">#</a></h3><p>第一范式：无重复字段，各字段为最小的逻辑存储单位</p>
+<p>第二范式：if belong 1NF，每一个其他字段完全依赖主键</p>
+<p>第三范式：if belong 1NF,2NF，去除传递依赖</p>
+<h3><span id="2-shu-ju-ku-yin-qing">2.数据库引擎</span><a href="#2-shu-ju-ku-yin-qing" class="header-anchor">#</a></h3><p>默认：InnoDB</p>
+<p>其他：MyISAM等</p>
+<a id="more"></a>
+
+<div class="toc">
 
 <!-- toc -->
 
 <ul>
-<li><a href="#1-ji-chu">1.基础</a><ul>
-<li><a href="#1-gui-fan-hua">1.规范化</a></li>
-<li><a href="#2-shu-ju-ku-yin-qing">2.数据库引擎</a></li>
-</ul>
-</li>
 <li><a href="#2-shu-ju-ku">2.数据库</a></li>
 <li><a href="#3-biao">3.表</a><ul>
 <li><a href="#1-zi-duan-lei-xing">1.字段类型</a></li>
@@ -147,13 +149,6 @@
 <!-- tocstop -->
 
 </div>
-
-<h2><span id="1-ji-chu">1.基础</span><a href="#1-ji-chu" class="header-anchor">#</a></h2><h3><span id="1-gui-fan-hua">1.规范化</span><a href="#1-gui-fan-hua" class="header-anchor">#</a></h3><p>第一范式：无重复字段，各字段为最小的逻辑存储单位</p>
-<p>第二范式：if belong 1NF，每一个其他字段完全依赖主键</p>
-<p>第三范式：if belong 1NF,2NF，去除传递依赖</p>
-<h3><span id="2-shu-ju-ku-yin-qing">2.数据库引擎</span><a href="#2-shu-ju-ku-yin-qing" class="header-anchor">#</a></h3><p>默认：InnoDB</p>
-<p>其他：MyISAM等</p>
-<a id="more"></a>
 
 <h2><span id="2-shu-ju-ku">2.数据库</span><a href="#2-shu-ju-ku" class="header-anchor">#</a></h2><p>创建数据库：create database 数据库名;</p>
 <p>查看所有数据库：show databases;</p>
@@ -300,7 +295,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/22/MySQL手记/" data-id="ck10dza2e0002ggv9elwkd4c1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/22/MySQL手记/" data-id="ck10ehih40002swv9rtka70a2" class="article-share-link">Share</a>
       
       
     </footer>
