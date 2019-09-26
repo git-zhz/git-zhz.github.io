@@ -66,9 +66,9 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-SpringMVC从零开始" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-SpringMVC从零开始（一）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/09/25/SpringMVC从零开始/" class="article-date">
+    <a href="/2019/09/25/SpringMVC从零开始（一）/" class="article-date">
   <time datetime="2019-09-25T15:09:57.000Z" itemprop="datePublished">2019-09-25</time>
 </a>
     
@@ -80,7 +80,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/25/SpringMVC从零开始/">SpringMVC从零开始</a>
+      <a class="article-title" href="/2019/09/25/SpringMVC从零开始（一）/">SpringMVC从零开始（一）</a>
     </h1>
   
 
@@ -88,18 +88,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>2019.9.25</p>
-<p><em>定位：servlet</em></p>
-<p><em>l流程：jsp-&gt;servelt(SpringMVC)-&gt;jsp</em></p>
+        <h2 id="定位：servlet"><a href="#定位：servlet" class="headerlink" title="定位：servlet"></a>定位：servlet</h2><h2 id="流程：jsp-gt-servlet-SpringMVC-gt-jsp"><a href="#流程：jsp-gt-servlet-SpringMVC-gt-jsp" class="headerlink" title="流程：jsp-&gt;servlet(SpringMVC)-&gt;jsp"></a>流程：jsp-&gt;servlet(SpringMVC)-&gt;jsp</h2><h2 id="第一个示例："><a href="#第一个示例：" class="headerlink" title="第一个示例："></a>第一个示例：</h2><p>我们先写两个jsp页面，要从一个jsp跳转到另一个</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--index.jsp发出welcome跳转请求--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"welcome"</span>&gt;</span>springmvc-welcome<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>目标页面</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--/views/success.jsp--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Holle SpringMVC!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>当我们点击<code>href</code>链接时，SpringMVC的任务是拦截这个跳转请求并处理,并跳转到目标页面。</p>
         
           <p class="article-more-link">
-            <a href="/2019/09/25/SpringMVC从零开始/#more">Read More</a>
+            <a href="/2019/09/25/SpringMVC从零开始（一）/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/25/SpringMVC从零开始/" data-id="ck0zeolje0000o8v9z3rww4oq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/25/SpringMVC从零开始（一）/" data-id="ck1062irf00010ov9xp3brkvz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -144,7 +148,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/22/MySQL手记/" data-id="ck0zeolp20003o8v909tco4jo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/22/MySQL手记/" data-id="ck1062irw00030ov92ykx9x1q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -186,7 +190,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/20/Hexo+Github搭建个人博客/" data-id="ck0zeolov0001o8v9r3uwg1jz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/20/Hexo+Github搭建个人博客/" data-id="ck1062ipv00000ov90kz7ypks" class="article-share-link">Share</a>
       
       
     </footer>
@@ -229,7 +233,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/19/Spring/" data-id="ck0zeolp50004o8v90v5ayyy7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/19/Spring/" data-id="ck1062is200040ov9ywuwioc2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -278,7 +282,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/13/hello-world/" data-id="ck0zeoloy0002o8v9dl6tf1je" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/13/hello-world/" data-id="ck1062irm00020ov9bqrgwo3n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -319,7 +323,7 @@
       <ul>
         
           <li>
-            <a href="/2019/09/25/SpringMVC从零开始/">SpringMVC从零开始</a>
+            <a href="/2019/09/25/SpringMVC从零开始（一）/">SpringMVC从零开始（一）</a>
           </li>
         
           <li>
