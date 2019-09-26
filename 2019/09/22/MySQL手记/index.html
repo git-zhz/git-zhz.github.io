@@ -7,17 +7,17 @@
   
   <title>MySQL手记 | 做一个傻子多么好</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.基础1.规范化第一范式：无重复字段，各字段为最小的逻辑存储单位 第二范式：if belong 1NF，每一个其他字段完全依赖主键 第三范式：if belong 1NF,2NF，去除传递依赖 2.数据库引擎默认：InnoDB 其他：MyISAM等">
+  <meta name="description" content="1.基础 1.规范化 2.数据库引擎   2.数据库 3.表 1.字段类型 2.索引* 3.约束 4.主键   4.CURD 5.查询 1.条件 运算符 通配符 关键字   2.聚合函数 3.连接查询 内连接 外连接 全外连接   4.子查询 5.合并查询结果 6.正则表达式 7.视图   14.存储过程和存储函数 15.触发器* 16.事件 17.备份与恢复 18.性能优化 1.分解表">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL手记">
 <meta property="og:url" content="http://yoursite.com/2019/09/22/MySQL手记/index.html">
 <meta property="og:site_name" content="做一个傻子多么好">
-<meta property="og:description" content="1.基础1.规范化第一范式：无重复字段，各字段为最小的逻辑存储单位 第二范式：if belong 1NF，每一个其他字段完全依赖主键 第三范式：if belong 1NF,2NF，去除传递依赖 2.数据库引擎默认：InnoDB 其他：MyISAM等">
+<meta property="og:description" content="1.基础 1.规范化 2.数据库引擎   2.数据库 3.表 1.字段类型 2.索引* 3.约束 4.主键   4.CURD 5.查询 1.条件 运算符 通配符 关键字   2.聚合函数 3.连接查询 内连接 外连接 全外连接   4.子查询 5.合并查询结果 6.正则表达式 7.视图   14.存储过程和存储函数 15.触发器* 16.事件 17.备份与恢复 18.性能优化 1.分解表">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-22T12:07:47.311Z">
+<meta property="og:updated_time" content="2019-09-26T06:18:06.268Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL手记">
-<meta name="twitter:description" content="1.基础1.规范化第一范式：无重复字段，各字段为最小的逻辑存储单位 第二范式：if belong 1NF，每一个其他字段完全依赖主键 第三范式：if belong 1NF,2NF，去除传递依赖 2.数据库引擎默认：InnoDB 其他：MyISAM等">
+<meta name="twitter:description" content="1.基础 1.规范化 2.数据库引擎   2.数据库 3.表 1.字段类型 2.索引* 3.约束 4.主键   4.CURD 5.查询 1.条件 运算符 通配符 关键字   2.聚合函数 3.连接查询 内连接 外连接 全外连接   4.子查询 5.合并查询结果 6.正则表达式 7.视图   14.存储过程和存储函数 15.触发器* 16.事件 17.备份与恢复 18.性能优化 1.分解表">
   
     <link rel="alternate" href="/atom.xml" title="做一个傻子多么好" type="application/atom+xml">
   
@@ -90,30 +90,88 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-基础"><a href="#1-基础" class="headerlink" title="1.基础"></a>1.基础</h2><h3 id="1-规范化"><a href="#1-规范化" class="headerlink" title="1.规范化"></a>1.规范化</h3><p>第一范式：无重复字段，各字段为最小的逻辑存储单位</p>
+        <div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#1-ji-chu">1.基础</a><ul>
+<li><a href="#1-gui-fan-hua">1.规范化</a></li>
+<li><a href="#2-shu-ju-ku-yin-qing">2.数据库引擎</a></li>
+</ul>
+</li>
+<li><a href="#2-shu-ju-ku">2.数据库</a></li>
+<li><a href="#3-biao">3.表</a><ul>
+<li><a href="#1-zi-duan-lei-xing">1.字段类型</a></li>
+<li><a href="#2-suo-yin">2.索引*</a></li>
+<li><a href="#3-yue-shu">3.约束</a></li>
+<li><a href="#4-zhu-jian">4.主键</a></li>
+</ul>
+</li>
+<li><a href="#4-curd">4.CURD</a></li>
+<li><a href="#5-cha-xun">5.查询</a><ul>
+<li><a href="#1-tiao-jian">1.条件</a><ul>
+<li><a href="#yun-suan-fu">运算符</a></li>
+<li><a href="#tong-pei-fu">通配符</a></li>
+<li><a href="#guan-jian-zi">关键字</a></li>
+</ul>
+</li>
+<li><a href="#2-ju-he-han-shu">2.聚合函数</a></li>
+<li><a href="#3-lian-jie-cha-xun">3.连接查询</a><ul>
+<li><a href="#nei-lian-jie">内连接</a></li>
+<li><a href="#wai-lian-jie">外连接</a></li>
+<li><a href="#quan-wai-lian-jie">全外连接</a></li>
+</ul>
+</li>
+<li><a href="#4-zi-cha-xun">4.子查询</a></li>
+<li><a href="#5-he-bing-cha-xun-jie-guo">5.合并查询结果</a></li>
+<li><a href="#6-zheng-ze-biao-da-shi">6.正则表达式</a></li>
+<li><a href="#7-shi-tu">7.视图</a></li>
+</ul>
+</li>
+<li><a href="#14-cun-chu-guo-cheng-he-cun-chu-han-shu">14.存储过程和存储函数</a></li>
+<li><a href="#15-hong-fa-qi">15.触发器*</a></li>
+<li><a href="#16-shi-jian">16.事件</a></li>
+<li><a href="#17-bei-fen-yu-hui-fu">17.备份与恢复</a></li>
+<li><a href="#18-xing-neng-you-hua">18.性能优化</a><ul>
+<li><a href="#1-fen-jie-biao">1.分解表</a></li>
+<li><a href="#2-zhong-jian-biao">2.中间表*</a></li>
+<li><a href="#3-you-hua-cha-ru-ji-lu-de-su-du">3.优化插入记录的速度</a></li>
+<li><a href="#4-biao-cao-zuo">4.表操作</a></li>
+<li><a href="#5-cha-xun-gao-su-huan-cun">5.查询高速缓存</a></li>
+<li><a href="#6-you-hua-duo-biao-cha-xun">6.优化多表查询</a></li>
+</ul>
+</li>
+<li><a href="#19-quan-xian-guan-li-yu-an-quan">19.权限管理与安全</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h2><span id="1-ji-chu">1.基础</span><a href="#1-ji-chu" class="header-anchor">#</a></h2><h3><span id="1-gui-fan-hua">1.规范化</span><a href="#1-gui-fan-hua" class="header-anchor">#</a></h3><p>第一范式：无重复字段，各字段为最小的逻辑存储单位</p>
 <p>第二范式：if belong 1NF，每一个其他字段完全依赖主键</p>
 <p>第三范式：if belong 1NF,2NF，去除传递依赖</p>
-<h3 id="2-数据库引擎"><a href="#2-数据库引擎" class="headerlink" title="2.数据库引擎"></a>2.数据库引擎</h3><p>默认：InnoDB</p>
+<h3><span id="2-shu-ju-ku-yin-qing">2.数据库引擎</span><a href="#2-shu-ju-ku-yin-qing" class="header-anchor">#</a></h3><p>默认：InnoDB</p>
 <p>其他：MyISAM等</p>
 <a id="more"></a>
 
-<h2 id="2-数据库"><a href="#2-数据库" class="headerlink" title="2.数据库"></a>2.数据库</h2><p>创建数据库：create database 数据库名;</p>
+<h2><span id="2-shu-ju-ku">2.数据库</span><a href="#2-shu-ju-ku" class="header-anchor">#</a></h2><p>创建数据库：create database 数据库名;</p>
 <p>查看所有数据库：show databases;</p>
 <p>选择数据库：use 数据库名;</p>
 <p>删除数据库：drop database 数据库名;</p>
-<h2 id="3-表"><a href="#3-表" class="headerlink" title="3.表"></a>3.表</h2><p>创建表：creat table 表名()</p>
+<h2><span id="3-biao">3.表</span><a href="#3-biao" class="header-anchor">#</a></h2><p>创建表：creat table 表名()</p>
 <p>查看表：show colums from 表名 from 数据库名;</p>
 <p>​                describe 表名；</p>
 <p>修改表：alter table 表名</p>
 <p>重命名表：rename table 表名 to 新表名;</p>
 <p>删除表：drop table 表名;</p>
-<h3 id="1-字段类型"><a href="#1-字段类型" class="headerlink" title="1.字段类型"></a>1.字段类型</h3><p>1.考虑速度，选择固定的列：char</p>
+<h3><span id="1-zi-duan-lei-xing">1.字段类型</span><a href="#1-zi-duan-lei-xing" class="header-anchor">#</a></h3><p>1.考虑速度，选择固定的列：char</p>
 <p>2.节省空间，使用动态列：varchar</p>
 <p>3.将列中内容限制在一种选择：enum</p>
 <p>4.允许在一列中有多个条目：set</p>
 <p>5.搜索内容不区分大小写：text</p>
 <p>6.搜索内容区分大小写：blob</p>
-<h3 id="2-索引"><a href="#2-索引" class="headerlink" title="2.索引*"></a>2.索引*</h3><p><em>默认索引类型：B+ Tree</em></p>
+<h3><span id="2-suo-yin">2.索引*</span><a href="#2-suo-yin" class="header-anchor">#</a></h3><p><em>默认索引类型：B+ Tree</em></p>
 <p><em>建表时不推荐索引，等到插入数据完成再建索引</em></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#在已建立的表中创建索引</span><br><span class="line">create [union|fulltext|spatial] index index_name on table_name(属性[(length)][asc|desc]);</span><br></pre></td></tr></table></figure>
 
@@ -132,20 +190,20 @@
 
 <p>6.空间索引：spatial index</p>
 <p>删除索引：drop index index_name on table_name;</p>
-<h3 id="3-约束"><a href="#3-约束" class="headerlink" title="3.约束"></a>3.约束</h3><p>primary key：主键</p>
+<h3><span id="3-yue-shu">3.约束</span><a href="#3-yue-shu" class="header-anchor">#</a></h3><p>primary key：主键</p>
 <p>foreign key：外键</p>
 <p>check：设置限定条件</p>
-<h3 id="4-主键"><a href="#4-主键" class="headerlink" title="4.主键"></a>4.主键</h3><p><em>一般的：自增,不为空</em></p>
+<h3><span id="4-zhu-jian">4.主键</span><a href="#4-zhu-jian" class="header-anchor">#</a></h3><p><em>一般的：自增,不为空</em></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id int(11) auto_increment primary key not null；</span><br></pre></td></tr></table></figure>
 
 <p><em>联合主键：</em></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">primary key(id,classid)；</span><br></pre></td></tr></table></figure>
 
-<h2 id="4-CURD"><a href="#4-CURD" class="headerlink" title="4.CURD"></a>4.CURD</h2><p>插入：insert into 表名(字段名) values (值)</p>
+<h2><span id="4-curd">4.CURD</span><a href="#4-curd" class="header-anchor">#</a></h2><p>插入：insert into 表名(字段名) values (值)</p>
 <p>查询：select 字段名 from 表名 where 条件</p>
 <p>修改：update 表名 set 字段名=新值 where 条件</p>
 <p>删除：delete from 表名 where 条件</p>
-<h2 id="5-查询"><a href="#5-查询" class="headerlink" title="5.查询"></a>5.查询</h2><h3 id="1-条件"><a href="#1-条件" class="headerlink" title="1.条件"></a>1.条件</h3><h5 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h5><p>1.&lt;&gt;同!=：判断不相等</p>
+<h2><span id="5-cha-xun">5.查询</span><a href="#5-cha-xun" class="header-anchor">#</a></h2><h3><span id="1-tiao-jian">1.条件</span><a href="#1-tiao-jian" class="header-anchor">#</a></h3><h5><span id="yun-suan-fu">运算符</span><a href="#yun-suan-fu" class="header-anchor">#</a></h5><p>1.&lt;&gt;同!=：判断不相等</p>
 <p>2.is null、is not null、&lt;=&gt;：判空</p>
 <p>3.between n and m：数据是否在某个范围</p>
 <p>4.in：数据是否存在某个集合中</p>
@@ -153,9 +211,9 @@
 <p>6.regexp：使用正则表达式匹配字符串</p>
 <p>7.逻辑：&amp;&amp; and 与；|| or 或；! not 非；xor 异或</p>
 <p>8.按位：&amp; 与；| 或；~ 取反；^ 异或；&lt;&lt; 左移；&gt;&gt; 右移</p>
-<h5 id="通配符"><a href="#通配符" class="headerlink" title="通配符"></a>通配符</h5><p>1.%：匹配多个</p>
+<h5><span id="tong-pei-fu">通配符</span><a href="#tong-pei-fu" class="header-anchor">#</a></h5><p>1.%：匹配多个</p>
 <p>2._：匹配一个</p>
-<h5 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h5><p>1.group by：分组查询</p>
+<h5><span id="guan-jian-zi">关键字</span><a href="#guan-jian-zi" class="header-anchor">#</a></h5><p>1.group by：分组查询</p>
 <p>2.distinct：消除重复行</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select distinct type from tb_book;</span><br></pre></td></tr></table></figure>
 
@@ -166,7 +224,7 @@
 <p>5.limit：限制查询结果记录条数</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from tb_book order by price desc limit 3;</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-聚合函数"><a href="#2-聚合函数" class="headerlink" title="2.聚合函数"></a>2.聚合函数</h3><p>指定字段：</p>
+<h3><span id="2-ju-he-han-shu">2.聚合函数</span><a href="#2-ju-he-han-shu" class="header-anchor">#</a></h3><p>指定字段：</p>
 <p>avg()：平均值</p>
 <p>count()：统计非空记录数</p>
 <p>distinct count()：统计不同记录数</p>
@@ -175,23 +233,23 @@
 <p>max()：最大值</p>
 <p>std()/stdtev()：标准背离值</p>
 <p>sum()：记录的总和</p>
-<h3 id="3-连接查询"><a href="#3-连接查询" class="headerlink" title="3.连接查询"></a>3.连接查询</h3><h5 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h5><h5 id="外连接"><a href="#外连接" class="headerlink" title="外连接"></a>外连接</h5><p>左外连接：left join 将左表所有数据分别与右表每一条数据连接</p>
+<h3><span id="3-lian-jie-cha-xun">3.连接查询</span><a href="#3-lian-jie-cha-xun" class="header-anchor">#</a></h3><h5><span id="nei-lian-jie">内连接</span><a href="#nei-lian-jie" class="header-anchor">#</a></h5><h5><span id="wai-lian-jie">外连接</span><a href="#wai-lian-jie" class="header-anchor">#</a></h5><p>左外连接：left join 将左表所有数据分别与右表每一条数据连接</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select tb_login.user,book,row from tb_login left join tb_book on tb_login.user=tb_book.user;</span><br></pre></td></tr></table></figure>
 
 <p>右外连接：right join</p>
-<h5 id="全外连接"><a href="#全外连接" class="headerlink" title="全外连接"></a>全外连接</h5><h3 id="4-子查询"><a href="#4-子查询" class="headerlink" title="4.子查询"></a>4.子查询</h3><p>in</p>
+<h5><span id="quan-wai-lian-jie">全外连接</span><a href="#quan-wai-lian-jie" class="header-anchor">#</a></h5><h3><span id="4-zi-cha-xun">4.子查询</span><a href="#4-zi-cha-xun" class="header-anchor">#</a></h3><p>in</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from tb_login where user in (select user from tb_book);</span><br></pre></td></tr></table></figure>
 
 <p>比较运算符</p>
 <p>exists</p>
 <p>and</p>
 <p>all</p>
-<h3 id="5-合并查询结果"><a href="#5-合并查询结果" class="headerlink" title="5.合并查询结果"></a>5.合并查询结果</h3><p><em>即把多列结果合成一列</em></p>
+<h3><span id="5-he-bing-cha-xun-jie-guo">5.合并查询结果</span><a href="#5-he-bing-cha-xun-jie-guo" class="header-anchor">#</a></h3><p><em>即把多列结果合成一列</em></p>
 <p>union（去除重复值）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select user from tb_book</span><br><span class="line">union</span><br><span class="line">select user from tb_login;</span><br></pre></td></tr></table></figure>
 
 <p>union all</p>
-<h3 id="6-正则表达式"><a href="#6-正则表达式" class="headerlink" title="6.正则表达式"></a>6.正则表达式</h3><p>^：以某个特定字符或字符串开头</p>
+<h3><span id="6-zheng-ze-biao-da-shi">6.正则表达式</span><a href="#6-zheng-ze-biao-da-shi" class="header-anchor">#</a></h3><p>^：以某个特定字符或字符串开头</p>
 <p>$：以某个特定字符或字符串结尾</p>
 <p>.：匹配字符串的任意一个字符</p>
 <p>[字符集合]：匹配字符集合里的任意一个字符</p>
@@ -203,46 +261,46 @@
 <p>+：匹配多个该符号之前的字符（至少为1）</p>
 <p>字符串{N}：出现N次</p>
 <p>字符串{M,N}：至少出现M次，至多出现N次</p>
-<h3 id="7-视图"><a href="#7-视图" class="headerlink" title="7.视图"></a>7.视图</h3><p><em>由查询定义，需权限</em></p>
+<h3><span id="7-shi-tu">7.视图</span><a href="#7-shi-tu" class="header-anchor">#</a></h3><p><em>由查询定义，需权限</em></p>
 <p>创建视图：creat view 视图名 as select语句；</p>
 <p>查看视图：describe 视图名；</p>
 <p>​                    show table status like ‘视图名’</p>
 <p>删除视图：drop view if exist 视图名；</p>
-<h2 id="14-存储过程和存储函数"><a href="#14-存储过程和存储函数" class="headerlink" title="14.存储过程和存储函数"></a>14.存储过程和存储函数</h2><p><em>为了保证数据的完整性和一致性</em></p>
+<h2><span id="14-cun-chu-guo-cheng-he-cun-chu-han-shu">14.存储过程和存储函数</span><a href="#14-cun-chu-guo-cheng-he-cun-chu-han-shu" class="header-anchor">#</a></h2><p><em>为了保证数据的完整性和一致性</em></p>
 <p>创建存储过程</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#定义一个输出变量count_num，存储过程应用select语句从studentinfo表中获取记录数，最后将结果传递给变量count_num</span><br><span class="line">#定义结束符</span><br><span class="line">delimiter // </span><br><span class="line">#输入输出类型[in|out|inout]</span><br><span class="line">#输出变量</span><br><span class="line">#参数类型</span><br><span class="line">create procedure count_student(out count_num int)</span><br><span class="line">read sql data</span><br><span class="line">begin </span><br><span class="line">select count(*) into coun_num from studentinfo;</span><br><span class="line">end</span><br><span class="line">//</span><br></pre></td></tr></table></figure>
 
 <p>调用存储过程：call 存储过程名（参数）</p>
-<h2 id="15-触发器"><a href="#15-触发器" class="headerlink" title="15.触发器*"></a>15.触发器*</h2><p>创建触发器</p>
+<h2><span id="15-hong-fa-qi">15.触发器*</span><a href="#15-hong-fa-qi" class="header-anchor">#</a></h2><p>创建触发器</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#该触发器的功能为 当向studentinfo表执行insert操作时之前，数据库系统自动向timelog插入当前时间</span><br><span class="line">delimiter //</span><br><span class="line">create tirgger auto_save_time before insert </span><br><span class="line">on studentinfo for each row</span><br><span class="line">begin</span><br><span class="line">insert into timelog(savetime) values(now());</span><br><span class="line">#可以有多条操作语句，只有一条时可省略begin、end</span><br><span class="line">end</span><br><span class="line">//</span><br><span class="line">#sacetime为字段名</span><br></pre></td></tr></table></figure>
 
 <p>查看触发器：show triggers;</p>
 <p>删除触发器：drop trigger 触发器名；</p>
-<h2 id="16-事件"><a href="#16-事件" class="headerlink" title="16.事件"></a>16.事件</h2><p><em>为了周期性地执行某一个命令或者sql语句</em></p>
-<h2 id="17-备份与恢复"><a href="#17-备份与恢复" class="headerlink" title="17.备份与恢复"></a>17.备份与恢复</h2><h2 id="18-性能优化"><a href="#18-性能优化" class="headerlink" title="18.性能优化"></a>18.性能优化</h2><h3 id="1-分解表"><a href="#1-分解表" class="headerlink" title="1.分解表"></a>1.分解表</h3><p>字段很多，且有些字段使用不频繁，可以将表分解成多个表</p>
-<h3 id="2-中间表"><a href="#2-中间表" class="headerlink" title="2.中间表*"></a>2.中间表*</h3><p>需要经常查询两个表中的几个字段，可以建立中间表</p>
+<h2><span id="16-shi-jian">16.事件</span><a href="#16-shi-jian" class="header-anchor">#</a></h2><p><em>为了周期性地执行某一个命令或者sql语句</em></p>
+<h2><span id="17-bei-fen-yu-hui-fu">17.备份与恢复</span><a href="#17-bei-fen-yu-hui-fu" class="header-anchor">#</a></h2><h2><span id="18-xing-neng-you-hua">18.性能优化</span><a href="#18-xing-neng-you-hua" class="header-anchor">#</a></h2><h3><span id="1-fen-jie-biao">1.分解表</span><a href="#1-fen-jie-biao" class="header-anchor">#</a></h3><p>字段很多，且有些字段使用不频繁，可以将表分解成多个表</p>
+<h3><span id="2-zhong-jian-biao">2.中间表*</span><a href="#2-zhong-jian-biao" class="header-anchor">#</a></h3><p>需要经常查询两个表中的几个字段，可以建立中间表</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#将其他表的需要的记录导入中间表中</span><br><span class="line">insert into temp_score select student.id,student.name,score.grade from student,score where student.id = score.stu_id;</span><br></pre></td></tr></table></figure>
 
-<h3 id="3-优化插入记录的速度"><a href="#3-优化插入记录的速度" class="headerlink" title="3.优化插入记录的速度"></a>3.优化插入记录的速度</h3><p><em>索引，唯一性校验会影响插入记录的速度，根据需要如下操作</em></p>
+<h3><span id="3-you-hua-cha-ru-ji-lu-de-su-du">3.优化插入记录的速度</span><a href="#3-you-hua-cha-ru-ji-lu-de-su-du" class="header-anchor">#</a></h3><p><em>索引，唯一性校验会影响插入记录的速度，根据需要如下操作</em></p>
 <p>禁用索引：alter table 表名 disable keys;</p>
 <p>重启索引：alter table 表名 enable keys;</p>
 <p>禁用唯一性检查：set unique_check=0;</p>
 <p>重启唯一性检查：set unique_check=1;</p>
 <p>优化insert语句</p>
 <p><em>一条insert语句插入多条记录比执行多条insert语句插入多条记录速度快，因为减少了与数据库之间的连接操作。</em></p>
-<h3 id="4-表操作"><a href="#4-表操作" class="headerlink" title="4.表操作"></a>4.表操作</h3><p>分析表：analyze table 表名</p>
+<h3><span id="4-biao-cao-zuo">4.表操作</span><a href="#4-biao-cao-zuo" class="header-anchor">#</a></h3><p>分析表：analyze table 表名</p>
 <p>检查表：check table 表名</p>
 <p><em>检查表是否存在错误</em></p>
 <p>优化表：optimize table 表名</p>
 <p><em>消除删除和更新造成的磁盘碎片，从而减少空间的浪费</em></p>
-<h3 id="5-查询高速缓存"><a href="#5-查询高速缓存" class="headerlink" title="5.查询高速缓存"></a>5.查询高速缓存</h3><p><em>首次查询，结果集会保存到高速缓存，再次执行相同查询可从高速缓存中检索</em></p>
+<h3><span id="5-cha-xun-gao-su-huan-cun">5.查询高速缓存</span><a href="#5-cha-xun-gao-su-huan-cun" class="header-anchor">#</a></h3><p><em>首次查询，结果集会保存到高速缓存，再次执行相同查询可从高速缓存中检索</em></p>
 <p>检查高速缓存是否开启：show variables like ‘%query_cache%’</p>
-<h3 id="6-优化多表查询"><a href="#6-优化多表查询" class="headerlink" title="6.优化多表查询"></a>6.优化多表查询</h3><p><em>子查询替代内连接</em></p>
-<h2 id="19-权限管理与安全"><a href="#19-权限管理与安全" class="headerlink" title="19.权限管理与安全"></a>19.权限管理与安全</h2>
+<h3><span id="6-you-hua-duo-biao-cha-xun">6.优化多表查询</span><a href="#6-you-hua-duo-biao-cha-xun" class="header-anchor">#</a></h3><p><em>子查询替代内连接</em></p>
+<h2><span id="19-quan-xian-guan-li-yu-an-quan">19.权限管理与安全</span><a href="#19-quan-xian-guan-li-yu-an-quan" class="header-anchor">#</a></h2>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/22/MySQL手记/" data-id="ck106tpmn0002pcv9lcbcvo60" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/22/MySQL手记/" data-id="ck10b22az0002jkv9adcpyhvv" class="article-share-link">Share</a>
       
       
     </footer>

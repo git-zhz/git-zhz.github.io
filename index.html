@@ -88,8 +88,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>[TOC]</p>
-<h2 id="定位：servlet"><a href="#定位：servlet" class="headerlink" title="定位：servlet"></a>定位：servlet</h2><h2 id="流程：jsp-gt-servlet-SpringMVC-gt-jsp"><a href="#流程：jsp-gt-servlet-SpringMVC-gt-jsp" class="headerlink" title="流程：jsp-&gt;servlet(SpringMVC)-&gt;jsp"></a>流程：jsp-&gt;servlet(SpringMVC)-&gt;jsp</h2><h2 id="第一个示例："><a href="#第一个示例：" class="headerlink" title="第一个示例："></a>第一个示例：</h2><p>我们先写两个jsp页面，要从一个jsp跳转到另一个</p>
+        <div class="tocStart"></div>
+
+<!-- toc -->
+
+<ul>
+<li><a href="#di-yi-ge-shi-li">第一个示例：</a><ul>
+<li><a href="#servlet-shi-xian-qu-fen">Servlet实现（区分）</a></li>
+<li><a href="#springmvc-shi-xian">SpringMVC实现</a><ul>
+<li><a href="#1-tian-jia-bi-yao-bao-jar">1.添加必要包（jar）</a></li>
+<li><a href="#2-springmvc-pei-zhi-wen-jian-ji-ben-she-zhi">2.SpringMVC配置文件基本设置</a></li>
+<li><a href="#3-web-xml-pei-zhi-wen-jian">3.web.xml配置文件</a></li>
+<li><a href="#4-kong-zhi-qi-lei">4.控制器类</a></li>
+<li><a href="#5-pei-zhi-springmvc-pei-zhi-wen-jian">5.配置SpringMVC配置文件</a></li>
+<li><a href="#6-liu-cheng-shu-li">6.流程梳理</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<div class="tocEnd"></div>
+
+<p>定位：servlet</p>
+<p>流程：jsp-&gt;servlet(SpringMVC)-&gt;jsp</p>
+<h2 id="第一个示例："><a href="#第一个示例：" class="headerlink" title="第一个示例："></a>第一个示例：</h2><p>我们先写两个jsp页面，要从一个jsp跳转到另一个</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--index.jsp发出welcome跳转请求--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"welcome"</span>&gt;</span>springmvc-welcome<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>目标页面</p>
@@ -104,7 +128,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/25/SpringMVC从零开始（一）/" data-id="ck106tpmp0003pcv94xajtgg2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/25/SpringMVC从零开始（一）/" data-id="ck10b22b20003jkv95oyyoiy1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -136,7 +160,65 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-基础"><a href="#1-基础" class="headerlink" title="1.基础"></a>1.基础</h2><h3 id="1-规范化"><a href="#1-规范化" class="headerlink" title="1.规范化"></a>1.规范化</h3><p>第一范式：无重复字段，各字段为最小的逻辑存储单位</p>
+        <div class="tocStart"></div>
+
+<!-- toc -->
+
+<ul>
+<li><a href="#1-ji-chu">1.基础</a><ul>
+<li><a href="#1-gui-fan-hua">1.规范化</a></li>
+<li><a href="#2-shu-ju-ku-yin-qing">2.数据库引擎</a></li>
+</ul>
+</li>
+<li><a href="#2-shu-ju-ku">2.数据库</a></li>
+<li><a href="#3-biao">3.表</a><ul>
+<li><a href="#1-zi-duan-lei-xing">1.字段类型</a></li>
+<li><a href="#2-suo-yin">2.索引*</a></li>
+<li><a href="#3-yue-shu">3.约束</a></li>
+<li><a href="#4-zhu-jian">4.主键</a></li>
+</ul>
+</li>
+<li><a href="#4-curd">4.CURD</a></li>
+<li><a href="#5-cha-xun">5.查询</a><ul>
+<li><a href="#1-tiao-jian">1.条件</a><ul>
+<li><a href="#yun-suan-fu">运算符</a></li>
+<li><a href="#tong-pei-fu">通配符</a></li>
+<li><a href="#guan-jian-zi">关键字</a></li>
+</ul>
+</li>
+<li><a href="#2-ju-he-han-shu">2.聚合函数</a></li>
+<li><a href="#3-lian-jie-cha-xun">3.连接查询</a><ul>
+<li><a href="#nei-lian-jie">内连接</a></li>
+<li><a href="#wai-lian-jie">外连接</a></li>
+<li><a href="#quan-wai-lian-jie">全外连接</a></li>
+</ul>
+</li>
+<li><a href="#4-zi-cha-xun">4.子查询</a></li>
+<li><a href="#5-he-bing-cha-xun-jie-guo">5.合并查询结果</a></li>
+<li><a href="#6-zheng-ze-biao-da-shi">6.正则表达式</a></li>
+<li><a href="#7-shi-tu">7.视图</a></li>
+</ul>
+</li>
+<li><a href="#14-cun-chu-guo-cheng-he-cun-chu-han-shu">14.存储过程和存储函数</a></li>
+<li><a href="#15-hong-fa-qi">15.触发器*</a></li>
+<li><a href="#16-shi-jian">16.事件</a></li>
+<li><a href="#17-bei-fen-yu-hui-fu">17.备份与恢复</a></li>
+<li><a href="#18-xing-neng-you-hua">18.性能优化</a><ul>
+<li><a href="#1-fen-jie-biao">1.分解表</a></li>
+<li><a href="#2-zhong-jian-biao">2.中间表*</a></li>
+<li><a href="#3-you-hua-cha-ru-ji-lu-de-su-du">3.优化插入记录的速度</a></li>
+<li><a href="#4-biao-cao-zuo">4.表操作</a></li>
+<li><a href="#5-cha-xun-gao-su-huan-cun">5.查询高速缓存</a></li>
+<li><a href="#6-you-hua-duo-biao-cha-xun">6.优化多表查询</a></li>
+</ul>
+</li>
+<li><a href="#19-quan-xian-guan-li-yu-an-quan">19.权限管理与安全</a></li>
+</ul>
+<!-- tocstop -->
+
+<div class="tocEnd"></div>
+
+<h2 id="1-基础"><a href="#1-基础" class="headerlink" title="1.基础"></a>1.基础</h2><h3 id="1-规范化"><a href="#1-规范化" class="headerlink" title="1.规范化"></a>1.规范化</h3><p>第一范式：无重复字段，各字段为最小的逻辑存储单位</p>
 <p>第二范式：if belong 1NF，每一个其他字段完全依赖主键</p>
 <p>第三范式：if belong 1NF,2NF，去除传递依赖</p>
 <h3 id="2-数据库引擎"><a href="#2-数据库引擎" class="headerlink" title="2.数据库引擎"></a>2.数据库引擎</h3><p>默认：InnoDB</p>
@@ -149,7 +231,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/22/MySQL手记/" data-id="ck106tpmn0002pcv9lcbcvo60" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/22/MySQL手记/" data-id="ck10b22az0002jkv9adcpyhvv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -191,7 +273,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/20/Hexo+Github搭建个人博客/" data-id="ck106tpmb0000pcv93sdposfo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/20/Hexo+Github搭建个人博客/" data-id="ck10b22ao0000jkv9w5nmiyfb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -223,18 +305,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h3><p>IOC（Inversion Of Controll，控制反转）是一种设计思想，将原本在程序中手动创建对象的控制权，交由给Spring框架来管理。IOC容器是Spring用来实现IOC的载体，IOC容器实际上就是一个Map(key, value)，Map中存放的是各种对象。</p>
+        <h3><span id="ioc">IOC</span><a href="#ioc" class="header-anchor">#</a></h3><p>IOC（Inversion Of Controll，控制反转）是一种设计思想，将原本在程序中手动创建对象的控制权，交由给Spring框架来管理。IOC容器是Spring用来实现IOC的载体，IOC容器实际上就是一个Map(key, value)，Map中存放的是各种对象。</p>
 <p>这样可以很大程度上简化应用的开发，把应用从复杂的依赖关系中解放出来。IOC容器就像是一个工厂，当需要创建一个对象，只需要配置好配置文件/注解即可，不用考虑对象是如何被创建出来的，大大增加了项目的可维护性且降低了开发难度。</p>
-<h3 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h3><p>AOP（Aspect-Oriented Programming，面向切面编程）能够将那些与业务无关，却为业务模块所共同调用的逻辑或责任（例如事务处理、日志管理、权限控制等）封装起来，便于减少系统的重复代码，降低模块间的耦合度，并有利于未来的可扩展性和可维护性。使用AOP之后我们可以把一些通用功能抽象出来，在需要用到的地方直接使用即可，这样可以大大简化代码量，提高了系统的扩展性。</p>
+<h3><span id="aop">AOP</span><a href="#aop" class="header-anchor">#</a></h3><p>AOP（Aspect-Oriented Programming，面向切面编程）能够将那些与业务无关，却为业务模块所共同调用的逻辑或责任（例如事务处理、日志管理、权限控制等）封装起来，便于减少系统的重复代码，降低模块间的耦合度，并有利于未来的可扩展性和可维护性。使用AOP之后我们可以把一些通用功能抽象出来，在需要用到的地方直接使用即可，这样可以大大简化代码量，提高了系统的扩展性。</p>
 <p>Spring AOP是基于动态代理的，如果要代理的对象实现了某个接口，那么Spring AOP就会使用JDK动态代理去创建代理对象；而对于没有实现接口的对象，就无法使用JDK动态代理，转而使用CGlib动态代理生成一个被代理对象的子类来作为代理。</p>
-<h3 id="Spring-AOP-AspectJ-AOP-的区别？"><a href="#Spring-AOP-AspectJ-AOP-的区别？" class="headerlink" title="Spring AOP / AspectJ AOP 的区别？"></a>Spring AOP / AspectJ AOP 的区别？</h3><p>Spring AOP属于运行时增强，而AspectJ是编译时增强。</p>
+<h3><span id="spring-aop-aspectj-aop-de-qu-bie">Spring AOP / AspectJ AOP 的区别？</span><a href="#spring-aop-aspectj-aop-de-qu-bie" class="header-anchor">#</a></h3><p>Spring AOP属于运行时增强，而AspectJ是编译时增强。</p>
 <p>Spring AOP基于代理（Proxying），而AspectJ基于字节码操作（Bytecode Manipulation）。</p>
 <p>AspectJ相比于Spring AOP功能更加强大，但是Spring AOP相对来说更简单。如果切面比较少，那么两者性能差异不大。但是，当切面太多的话，最好选择AspectJ，它比SpringAOP快很多。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/19/Spring/" data-id="ck106tpmj0001pcv9mxgav8n2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/19/Spring/" data-id="ck10b22aw0001jkv93w18y4y9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -267,23 +349,23 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<h2><span id="quick-start">Quick Start</span><a href="#quick-start" class="header-anchor">#</a></h2><h3><span id="create-a-new-post">Create a new post</span><a href="#create-a-new-post" class="header-anchor">#</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h3><span id="run-server">Run server</span><a href="#run-server" class="header-anchor">#</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<h3><span id="generate-static-files">Generate static files</span><a href="#generate-static-files" class="header-anchor">#</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h3><span id="deploy-to-remote-sites">Deploy to remote sites</span><a href="#deploy-to-remote-sites" class="header-anchor">#</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/13/hello-world/" data-id="ck106tpmr0004pcv9qjodkm83" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/13/hello-world/" data-id="ck10b22b30004jkv9vpd0kxrr" class="article-share-link">Share</a>
       
       
     </footer>

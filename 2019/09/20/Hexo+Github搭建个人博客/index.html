@@ -94,14 +94,14 @@
 <p>1.全是静态文件，访问速度快；<br>2.免费方便，不用花一分钱就可以搭建一个自由的个人博客，不需要服务器不需要后台；<br>3.可以随意绑定自己的域名，不仔细看的话根本看不出来你的网站是基于github的；<br>4.数据绝对安全，基于github的版本管理，想恢复到哪个历史版本都行；<br>5.博客内容可以轻松打包、转移、发布到其它平台；</p>
 <a id="more"></a>
 
-<h2 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h2><h3 id="1-安装程序"><a href="#1-安装程序" class="headerlink" title="1.安装程序"></a>1.安装程序</h3><p>1.安装<code>node.js</code>,<code>git</code>：官网下载最新版即可</p>
+<h2><span id="bu-zou">步骤：</span><a href="#bu-zou" class="header-anchor">#</a></h2><h3><span id="1-an-zhuang-cheng-xu">1.安装程序</span><a href="#1-an-zhuang-cheng-xu" class="header-anchor">#</a></h3><p>1.安装<code>node.js</code>,<code>git</code>：官网下载最新版即可</p>
 <p>检查版本：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br><span class="line">git --version</span><br></pre></td></tr></table></figure>
 
 <p>2.安装hexo(win+r  cmd)</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm insatll -g hexo-cli</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-GitHub"><a href="#2-GitHub" class="headerlink" title="2.GitHub"></a>2.GitHub</h3><p>1.注册（用户名，邮箱，密码）</p>
+<h3><span id="2-github">2.GitHub</span><a href="#2-github" class="header-anchor">#</a></h3><p>1.注册（用户名，邮箱，密码）</p>
 <p>2.创建一个名为 <code>用户名.github.io</code> 的仓库，当你博客搭建成功时，域名就为 <code>https://用户名.github.io</code></p>
 <p>3.配置ssh key</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;邮箱&quot;</span><br></pre></td></tr></table></figure>
@@ -116,7 +116,7 @@
 <p>5.配置信息</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global uesr.name &quot;用户名&quot;</span><br><span class="line">git config --global user.email &quot;邮箱&quot;</span><br></pre></td></tr></table></figure>
 
-<h3 id="3-生成博客"><a href="#3-生成博客" class="headerlink" title="3.生成博客"></a>3.生成博客</h3><p>1.新建一个空文件夹，此文件夹为存放你博客的内容</p>
+<h3><span id="3-sheng-cheng-bo-ke">3.生成博客</span><a href="#3-sheng-cheng-bo-ke" class="header-anchor">#</a></h3><p>1.新建一个空文件夹，此文件夹为存放你博客的内容</p>
 <p>2.初始化</p>
 <p>进入此文件夹，鼠标右键<code>Git Bash Here</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
@@ -128,7 +128,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
 
 <p>浏览器输入<code>localhost:40000</code>可本地查看你的博客，<code>ctrl+C</code>结束服务。</p>
-<h3 id="4-部署"><a href="#4-部署" class="headerlink" title="4.部署"></a>4.部署</h3><p>1.安装插件</p>
+<h3><span id="4-bu-shu">4.部署</span><a href="#4-bu-shu" class="header-anchor">#</a></h3><p>1.安装插件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
 
 <p>2.修改配置信息</p>
@@ -138,13 +138,13 @@
 <p>3.上传</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
 
-<h2 id="错误："><a href="#错误：" class="headerlink" title="错误："></a>错误：</h2><p>1.安装插件<code>hexo-deployer-git</code>后，输入任意hexo指令出现：<code>RROR Plugin load failed: hexo-deployer-git</code></p>
+<h2><span id="cuo-wu">错误：</span><a href="#cuo-wu" class="header-anchor">#</a></h2><p>1.安装插件<code>hexo-deployer-git</code>后，输入任意hexo指令出现：<code>RROR Plugin load failed: hexo-deployer-git</code></p>
 <p>原因：<code>node.js</code>版本太低，不支持该语法。安装高版本nodejs解决问题。</p>
 <p>2.<code>hexo d</code> 上传到GitHub上的库时出现：<code>fatal: Could not read from remote repository.</code></p>
 <p>原因：config.yml文件配置有误，正确格式为：</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repository:</span> <span class="string">git@github.com:username/username.github.io.git</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="新建文章："><a href="#新建文章：" class="headerlink" title="新建文章："></a>新建文章：</h2><p>在此文件夹下</p>
+<h2><span id="xin-jian-wen-zhang">新建文章：</span><a href="#xin-jian-wen-zhang" class="header-anchor">#</a></h2><p>在此文件夹下</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &lt;title&gt;</span><br></pre></td></tr></table></figure>
 
 <p>会在source目录下生成md文件，打开这个文件就能编写博客内容了。</p>
@@ -154,7 +154,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/20/Hexo+Github搭建个人博客/" data-id="ck106tpmb0000pcv93sdposfo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/20/Hexo+Github搭建个人博客/" data-id="ck10b22ao0000jkv9w5nmiyfb" class="article-share-link">Share</a>
       
       
     </footer>

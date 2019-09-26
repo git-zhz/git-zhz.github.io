@@ -7,17 +7,17 @@
   
   <title>SpringMVC从零开始（一） | 做一个傻子多么好</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[TOC] 定位：servlet流程：jsp-&amp;gt;servlet(SpringMVC)-&amp;gt;jsp第一个示例：我们先写两个jsp页面，要从一个jsp跳转到另一个 1234&amp;lt;!--index.jsp发出welcome跳转请求--&amp;gt;&amp;lt;body&amp;gt;    &amp;lt;a href=&quot;welcome&quot;&amp;gt;springmvc-welcome&amp;lt;/a&amp;gt;&amp;lt;/body">
+  <meta name="description" content="第一个示例： Servlet实现（区分） SpringMVC实现 1.添加必要包（jar） 2.SpringMVC配置文件基本设置 3.web.xml配置文件 4.控制器类 5.配置SpringMVC配置文件 6.流程梳理          定位：servlet 流程：jsp-&amp;gt;servlet(SpringMVC)-&amp;gt;jsp 第一个示例：我们先写两个jsp页面，要从一个jsp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringMVC从零开始（一）">
 <meta property="og:url" content="http://yoursite.com/2019/09/25/SpringMVC从零开始（一）/index.html">
 <meta property="og:site_name" content="做一个傻子多么好">
-<meta property="og:description" content="[TOC] 定位：servlet流程：jsp-&amp;gt;servlet(SpringMVC)-&amp;gt;jsp第一个示例：我们先写两个jsp页面，要从一个jsp跳转到另一个 1234&amp;lt;!--index.jsp发出welcome跳转请求--&amp;gt;&amp;lt;body&amp;gt;    &amp;lt;a href=&quot;welcome&quot;&amp;gt;springmvc-welcome&amp;lt;/a&amp;gt;&amp;lt;/body">
+<meta property="og:description" content="第一个示例： Servlet实现（区分） SpringMVC实现 1.添加必要包（jar） 2.SpringMVC配置文件基本设置 3.web.xml配置文件 4.控制器类 5.配置SpringMVC配置文件 6.流程梳理          定位：servlet 流程：jsp-&amp;gt;servlet(SpringMVC)-&amp;gt;jsp 第一个示例：我们先写两个jsp页面，要从一个jsp">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-26T04:18:21.290Z">
+<meta property="og:updated_time" content="2019-09-26T06:09:26.571Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringMVC从零开始（一）">
-<meta name="twitter:description" content="[TOC] 定位：servlet流程：jsp-&amp;gt;servlet(SpringMVC)-&amp;gt;jsp第一个示例：我们先写两个jsp页面，要从一个jsp跳转到另一个 1234&amp;lt;!--index.jsp发出welcome跳转请求--&amp;gt;&amp;lt;body&amp;gt;    &amp;lt;a href=&quot;welcome&quot;&amp;gt;springmvc-welcome&amp;lt;/a&amp;gt;&amp;lt;/body">
+<meta name="twitter:description" content="第一个示例： Servlet实现（区分） SpringMVC实现 1.添加必要包（jar） 2.SpringMVC配置文件基本设置 3.web.xml配置文件 4.控制器类 5.配置SpringMVC配置文件 6.流程梳理          定位：servlet 流程：jsp-&amp;gt;servlet(SpringMVC)-&amp;gt;jsp 第一个示例：我们先写两个jsp页面，要从一个jsp">
   
     <link rel="alternate" href="/atom.xml" title="做一个傻子多么好" type="application/atom+xml">
   
@@ -90,8 +90,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>[TOC]</p>
-<h2 id="定位：servlet"><a href="#定位：servlet" class="headerlink" title="定位：servlet"></a>定位：servlet</h2><h2 id="流程：jsp-gt-servlet-SpringMVC-gt-jsp"><a href="#流程：jsp-gt-servlet-SpringMVC-gt-jsp" class="headerlink" title="流程：jsp-&gt;servlet(SpringMVC)-&gt;jsp"></a>流程：jsp-&gt;servlet(SpringMVC)-&gt;jsp</h2><h2 id="第一个示例："><a href="#第一个示例：" class="headerlink" title="第一个示例："></a>第一个示例：</h2><p>我们先写两个jsp页面，要从一个jsp跳转到另一个</p>
+        <div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#di-yi-ge-shi-li">第一个示例：</a><ul>
+<li><a href="#servlet-shi-xian-qu-fen">Servlet实现（区分）</a></li>
+<li><a href="#springmvc-shi-xian">SpringMVC实现</a><ul>
+<li><a href="#1-tian-jia-bi-yao-bao-jar">1.添加必要包（jar）</a></li>
+<li><a href="#2-springmvc-pei-zhi-wen-jian-ji-ben-she-zhi">2.SpringMVC配置文件基本设置</a></li>
+<li><a href="#3-web-xml-pei-zhi-wen-jian">3.web.xml配置文件</a></li>
+<li><a href="#4-kong-zhi-qi-lei">4.控制器类</a></li>
+<li><a href="#5-pei-zhi-springmvc-pei-zhi-wen-jian">5.配置SpringMVC配置文件</a></li>
+<li><a href="#6-liu-cheng-shu-li">6.流程梳理</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<p>定位：servlet</p>
+<p>流程：jsp-&gt;servlet(SpringMVC)-&gt;jsp</p>
+<h2><span id="di-yi-ge-shi-li">第一个示例：</span><a href="#di-yi-ge-shi-li" class="header-anchor">#</a></h2><p>我们先写两个jsp页面，要从一个jsp跳转到另一个</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--index.jsp发出welcome跳转请求--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"welcome"</span>&gt;</span>springmvc-welcome<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>目标页面</p>
@@ -100,15 +124,15 @@
 <p>当我们点击<code>href</code>链接时，SpringMVC的任务是拦截这个跳转请求并处理,并跳转到目标页面。</p>
 <a id="more"></a>
 
-<h4 id="Servlet实现（区分）"><a href="#Servlet实现（区分）" class="headerlink" title="Servlet实现（区分）"></a>Servlet实现（区分）</h4><p>普通的Servlet通过<code>&lt;url-pattern&gt;</code>拦截请求，然后交给对应的Servlet处理</p>
+<h3><span id="servlet-shi-xian-qu-fen">Servlet实现（区分）</span><a href="#servlet-shi-xian-qu-fen" class="header-anchor">#</a></h3><p>普通的Servlet通过<code>&lt;url-pattern&gt;</code>拦截请求，然后交给对应的Servlet处理</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--web.xml--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">description</span>&gt;</span><span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">display-name</span>&gt;</span>Test<span class="tag">&lt;/<span class="name">display-name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>Test<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span><span class="comment">&lt;!--name--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>Test.Test<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span><span class="comment">&lt;!--2.处理--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>Test<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span><span class="comment">&lt;!--name相对应映射--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">urI-pattern</span>&gt;</span>/Test<span class="tag">&lt;/<span class="name">urI-pattern</span>&gt;</span><span class="comment">&lt;!--1.拦截--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="SpringMVC实现"><a href="#SpringMVC实现" class="headerlink" title="SpringMVC实现"></a>SpringMVC实现</h4><h5 id="1-添加必要包（jar）"><a href="#1-添加必要包（jar）" class="headerlink" title="1.添加必要包（jar）"></a>1.添加必要包（jar）</h5><p>Spring包：spring-aop.jar、spring-bean.jar、spring-core.jar、spring-context.jar、spring-web.jar、commons-logging.jar</p>
+<h3><span id="springmvc-shi-xian">SpringMVC实现</span><a href="#springmvc-shi-xian" class="header-anchor">#</a></h3><h4><span id="1-tian-jia-bi-yao-bao-jar">1.添加必要包（jar）</span><a href="#1-tian-jia-bi-yao-bao-jar" class="header-anchor">#</a></h4><p>Spring包：spring-aop.jar、spring-bean.jar、spring-core.jar、spring-context.jar、spring-web.jar、commons-logging.jar</p>
 <p>SpringMVC包（依赖于Spring包）：spring-webmvc.jar</p>
-<h5 id="2-SpringMVC配置文件基本设置"><a href="#2-SpringMVC配置文件基本设置" class="headerlink" title="2.SpringMVC配置文件基本设置"></a>2.SpringMVC配置文件基本设置</h5><p>默认命名：springDispatcherServlet-servlet.xml</p>
+<h4><span id="2-springmvc-pei-zhi-wen-jian-ji-ben-she-zhi">2.SpringMVC配置文件基本设置</span><a href="#2-springmvc-pei-zhi-wen-jian-ji-ben-she-zhi" class="header-anchor">#</a></h4><p>默认命名：springDispatcherServlet-servlet.xml</p>
 <p>默认路径：/WEB-INF/</p>
 <p>选中常用的命名空间：beans、aop、context、mvc</p>
-<h5 id="3-web-xml配置文件"><a href="#3-web-xml配置文件" class="headerlink" title="3.web.xml配置文件"></a>3.web.xml配置文件</h5><p>目的：拦截所有请求交给SpringMVC处理，不用配置每一个<code>&lt;url-pattern&gt;</code>拦截，直接找DispatcherServlet配置</p>
+<h4><span id="3-web-xml-pei-zhi-wen-jian">3.web.xml配置文件</span><a href="#3-web-xml-pei-zhi-wen-jian" class="header-anchor">#</a></h4><p>目的：拦截所有请求交给SpringMVC处理，不用配置每一个<code>&lt;url-pattern&gt;</code>拦截，直接找DispatcherServlet配置</p>
 <p>首先配置spring-webmvc.jar里面自带的Servlet(DispatcherServlet——SpringMVCd的入口)</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--web.xml--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>springDispatcherServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span><span class="comment">&lt;!--name--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--拦截到的请求由DispatcherServlet处理--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span><span class="comment">&lt;!--启动时以第一个身份启动--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>springDispatcherServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span><span class="comment">&lt;!--与name相对应映射--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span><span class="comment">&lt;!--拦截所有请求，注意不是/*--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping〉</span></span></span><br></pre></td></tr></table></figure>
 
@@ -118,19 +142,19 @@
 <p>可以通过设置<code>&lt;url-pattern&gt;/&lt;/url-pattern&gt;</code>，决定需要拦截的请求</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--拦截&lt;a href="/test/welcome"&gt;,拦截/test开头的请求--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/test<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--拦截&lt;a href="welcome。action"&gt;,拦截.action结尾的请求--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>.action<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--也可以拦截具体请求--&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h5 id="4-控制器类"><a href="#4-控制器类" class="headerlink" title="4.控制器类"></a>4.控制器类</h5><p>目的：通过注解拦截请求，具体方法实现</p>
+<h4><span id="4-kong-zhi-qi-lei">4.控制器类</span><a href="#4-kong-zhi-qi-lei" class="header-anchor">#</a></h4><p>目的：通过注解拦截请求，具体方法实现</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//SpringMVCHandler.java控制器拦截请求(action)</span></span><br><span class="line"><span class="meta">@Controller</span><span class="comment">//声明这是一个控制器类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringMVCHandler</span></span>&#123;</span><br><span class="line">	<span class="meta">@RequestMapping</span>(<span class="string">"welcome"</span>)<span class="comment">//拦截welcome请求</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">welcome</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"success"</span><span class="comment">//返回结果</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h5 id="5-配置SpringMVC配置文件"><a href="#5-配置SpringMVC配置文件" class="headerlink" title="5.配置SpringMVC配置文件"></a>5.配置SpringMVC配置文件</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--扫描器：有注解的类必须把所在包名添加到扫描器里面--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>&gt;</span>"packagename"<span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--配置视图解析器：为返回的字段拼接上前后缀--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.view.InternalResourceViewResolver"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--前缀--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"prefix"</span> <span class="attr">value</span>=<span class="string">"/views/"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--后缀--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"suffix"</span> <span class="attr">value</span>=<span class="string">".jsp"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--处理结果为/views/success.jsp（目标页面）,然后跳转--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4><span id="5-pei-zhi-springmvc-pei-zhi-wen-jian">5.配置SpringMVC配置文件</span><a href="#5-pei-zhi-springmvc-pei-zhi-wen-jian" class="header-anchor">#</a></h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--扫描器：有注解的类必须把所在包名添加到扫描器里面--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>&gt;</span>"packagename"<span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--配置视图解析器：为返回的字段拼接上前后缀--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.view.InternalResourceViewResolver"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--前缀--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"prefix"</span> <span class="attr">value</span>=<span class="string">"/views/"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--后缀--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"suffix"</span> <span class="attr">value</span>=<span class="string">".jsp"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--处理结果为/views/success.jsp（目标页面）,然后跳转--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h5 id="6-流程梳理"><a href="#6-流程梳理" class="headerlink" title="6.流程梳理"></a>6.流程梳理</h5><p>1.配置web.xml告知程序，拦截的请求交由SpringMVC处理</p>
+<h4><span id="6-liu-cheng-shu-li">6.流程梳理</span><a href="#6-liu-cheng-shu-li" class="header-anchor">#</a></h4><p>1.配置web.xml告知程序，拦截的请求交由SpringMVC处理</p>
 <p>2.控制器类通过注解，就能拦截对应的请求，返回对应结果</p>
 <p>3.配置SpringMVC配置文件，对返回的结果进行处理</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/25/SpringMVC从零开始（一）/" data-id="ck106tpmp0003pcv94xajtgg2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/25/SpringMVC从零开始（一）/" data-id="ck10b22b20003jkv95oyyoiy1" class="article-share-link">Share</a>
       
       
     </footer>
