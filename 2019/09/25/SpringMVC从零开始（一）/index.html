@@ -7,17 +7,17 @@
   
   <title>SpringMVC从零开始（一） | 做一个傻子多么好</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="定位：servlet流程：jsp-&amp;gt;servlet(SpringMVC)-&amp;gt;jsp第一个示例：我们先写两个jsp页面，要从一个jsp跳转到另一个 1234&amp;lt;!--index.jsp发出welcome跳转请求--&amp;gt;&amp;lt;body&amp;gt;    &amp;lt;a href=&quot;welcome&quot;&amp;gt;springmvc-welcome&amp;lt;/a&amp;gt;&amp;lt;/body&amp;gt;">
+  <meta name="description" content="[TOC] 定位：servlet流程：jsp-&amp;gt;servlet(SpringMVC)-&amp;gt;jsp第一个示例：我们先写两个jsp页面，要从一个jsp跳转到另一个 1234&amp;lt;!--index.jsp发出welcome跳转请求--&amp;gt;&amp;lt;body&amp;gt;    &amp;lt;a href=&quot;welcome&quot;&amp;gt;springmvc-welcome&amp;lt;/a&amp;gt;&amp;lt;/body">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringMVC从零开始（一）">
 <meta property="og:url" content="http://yoursite.com/2019/09/25/SpringMVC从零开始（一）/index.html">
 <meta property="og:site_name" content="做一个傻子多么好">
-<meta property="og:description" content="定位：servlet流程：jsp-&amp;gt;servlet(SpringMVC)-&amp;gt;jsp第一个示例：我们先写两个jsp页面，要从一个jsp跳转到另一个 1234&amp;lt;!--index.jsp发出welcome跳转请求--&amp;gt;&amp;lt;body&amp;gt;    &amp;lt;a href=&quot;welcome&quot;&amp;gt;springmvc-welcome&amp;lt;/a&amp;gt;&amp;lt;/body&amp;gt;">
+<meta property="og:description" content="[TOC] 定位：servlet流程：jsp-&amp;gt;servlet(SpringMVC)-&amp;gt;jsp第一个示例：我们先写两个jsp页面，要从一个jsp跳转到另一个 1234&amp;lt;!--index.jsp发出welcome跳转请求--&amp;gt;&amp;lt;body&amp;gt;    &amp;lt;a href=&quot;welcome&quot;&amp;gt;springmvc-welcome&amp;lt;/a&amp;gt;&amp;lt;/body">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-26T03:56:22.707Z">
+<meta property="og:updated_time" content="2019-09-26T04:18:21.290Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringMVC从零开始（一）">
-<meta name="twitter:description" content="定位：servlet流程：jsp-&amp;gt;servlet(SpringMVC)-&amp;gt;jsp第一个示例：我们先写两个jsp页面，要从一个jsp跳转到另一个 1234&amp;lt;!--index.jsp发出welcome跳转请求--&amp;gt;&amp;lt;body&amp;gt;    &amp;lt;a href=&quot;welcome&quot;&amp;gt;springmvc-welcome&amp;lt;/a&amp;gt;&amp;lt;/body&amp;gt;">
+<meta name="twitter:description" content="[TOC] 定位：servlet流程：jsp-&amp;gt;servlet(SpringMVC)-&amp;gt;jsp第一个示例：我们先写两个jsp页面，要从一个jsp跳转到另一个 1234&amp;lt;!--index.jsp发出welcome跳转请求--&amp;gt;&amp;lt;body&amp;gt;    &amp;lt;a href=&quot;welcome&quot;&amp;gt;springmvc-welcome&amp;lt;/a&amp;gt;&amp;lt;/body">
   
     <link rel="alternate" href="/atom.xml" title="做一个傻子多么好" type="application/atom+xml">
   
@@ -90,7 +90,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="定位：servlet"><a href="#定位：servlet" class="headerlink" title="定位：servlet"></a>定位：servlet</h2><h2 id="流程：jsp-gt-servlet-SpringMVC-gt-jsp"><a href="#流程：jsp-gt-servlet-SpringMVC-gt-jsp" class="headerlink" title="流程：jsp-&gt;servlet(SpringMVC)-&gt;jsp"></a>流程：jsp-&gt;servlet(SpringMVC)-&gt;jsp</h2><h2 id="第一个示例："><a href="#第一个示例：" class="headerlink" title="第一个示例："></a>第一个示例：</h2><p>我们先写两个jsp页面，要从一个jsp跳转到另一个</p>
+        <p>[TOC]</p>
+<h2 id="定位：servlet"><a href="#定位：servlet" class="headerlink" title="定位：servlet"></a>定位：servlet</h2><h2 id="流程：jsp-gt-servlet-SpringMVC-gt-jsp"><a href="#流程：jsp-gt-servlet-SpringMVC-gt-jsp" class="headerlink" title="流程：jsp-&gt;servlet(SpringMVC)-&gt;jsp"></a>流程：jsp-&gt;servlet(SpringMVC)-&gt;jsp</h2><h2 id="第一个示例："><a href="#第一个示例：" class="headerlink" title="第一个示例："></a>第一个示例：</h2><p>我们先写两个jsp页面，要从一个jsp跳转到另一个</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--index.jsp发出welcome跳转请求--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"welcome"</span>&gt;</span>springmvc-welcome<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>目标页面</p>
@@ -129,7 +130,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/25/SpringMVC从零开始（一）/" data-id="ck1062irf00010ov9xp3brkvz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/25/SpringMVC从零开始（一）/" data-id="ck106tpmp0003pcv94xajtgg2" class="article-share-link">Share</a>
       
       
     </footer>
