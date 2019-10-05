@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="做一个傻子多么好">
 <meta property="og:description" content="定位：servlet 流程：jsp-&amp;gt;servlet(SpringMVC)-&amp;gt;jsp">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-26T09:36:27.249Z">
+<meta property="og:updated_time" content="2019-09-26T11:49:17.415Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringMVC从零开始">
 <meta name="twitter:description" content="定位：servlet 流程：jsp-&amp;gt;servlet(SpringMVC)-&amp;gt;jsp">
@@ -150,7 +150,7 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--web.xml--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--初始化参数,声明mvc配置文件位置--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span><span class="comment">&lt;!--定位方法名--&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>classpath:springmvcname.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>可以通过设置<code>&lt;url-pattern&gt;/&lt;/url-pattern&gt;</code>，决定需要拦截的请求</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--拦截&lt;a href="/test/welcome"&gt;,拦截/test开头的请求--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/test<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--拦截&lt;a href="welcome。action"&gt;,拦截.action结尾的请求--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>.action<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--也可以拦截具体请求--&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--拦截&lt;a href="/test/welcome"&gt;,拦截/test开头的请求--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/test<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--拦截&lt;a href="welcome.action"&gt;,拦截.action结尾的请求--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>.action<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--也可以拦截具体请求--&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h4><span id="4-kong-zhi-qi-lei">4.控制器类</span><a href="#4-kong-zhi-qi-lei" class="header-anchor">#</a></h4><p>目的：通过注解拦截请求，具体方法实现</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//SpringMVCHandler.java控制器拦截请求(action)</span></span><br><span class="line"><span class="meta">@Controller</span><span class="comment">//声明这是一个控制器类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringMVCHandler</span></span>&#123;</span><br><span class="line">	<span class="meta">@RequestMapping</span>(<span class="string">"welcome"</span>)<span class="comment">//拦截welcome请求</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">welcome</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"success"</span><span class="comment">//返回结果</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -198,7 +198,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/25/SpringMVC从零开始/" data-id="ck10i7m970003v4v9s0qlltl7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/25/SpringMVC从零开始/" data-id="ck1dokjx00001b4v9v6fiz03s" class="article-share-link">Share</a>
       
       
     </footer>
@@ -206,6 +206,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2019/10/05/MyBatis从零开始/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          MyBatis从零开始
+        
+      </div>
+    </a>
   
   
     <a href="/2019/09/22/MySQL手记/" id="article-nav-older" class="article-nav-link-wrap">
@@ -234,7 +243,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
     </div>
   </div>
 
@@ -245,6 +254,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/10/05/MyBatis从零开始/">MyBatis从零开始</a>
+          </li>
         
           <li>
             <a href="/2019/09/25/SpringMVC从零开始/">SpringMVC从零开始</a>
@@ -260,10 +273,6 @@
         
           <li>
             <a href="/2019/09/19/Spring/">Spring</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/13/hello-world/">Hello World</a>
           </li>
         
       </ul>
