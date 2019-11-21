@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="alternate" href="/atom.xml" title="做一个傻子多么好" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},
+    path: 'serach.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="1.基础1.规范化第一范式：无重复字段，各字段为最小的逻辑存储单位 第二范式：if belong 1NF，每一个其他字段完全依赖主键 第三范式：if belong 1NF,2NF，去除传递依赖 2.数据库引擎默认：InnoDB 其他：MyISAM等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL手记">
+<meta property="og:url" content="http://yoursite.com/2019/09/22/MySQL手记/index.html">
+<meta property="og:site_name" content="做一个傻子多么好">
+<meta property="og:description" content="1.基础1.规范化第一范式：无重复字段，各字段为最小的逻辑存储单位 第二范式：if belong 1NF，每一个其他字段完全依赖主键 第三范式：if belong 1NF,2NF，去除传递依赖 2.数据库引擎默认：InnoDB 其他：MyISAM等">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-26T07:52:51.790Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL手记">
+<meta name="twitter:description" content="1.基础1.规范化第一范式：无重复字段，各字段为最小的逻辑存储单位 第二范式：if belong 1NF，每一个其他字段完全依赖主键 第三范式：if belong 1NF,2NF，去除传递依赖 2.数据库引擎默认：InnoDB 其他：MyISAM等">
+
+<link rel="canonical" href="http://yoursite.com/2019/09/22/MySQL手记/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>MySQL手记 | 做一个傻子多么好</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">做一个傻子多么好</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">——张小臻在前行</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/22/MySQL手记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="张小臻">
+      <meta itemprop="description" content="张小臻的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="做一个傻子多么好">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MySQL手记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-09-22 20:06:56" itemprop="dateCreated datePublished" datetime="2019-09-22T20:06:56+08:00">2019-09-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-26 15:52:51" itemprop="dateModified" datetime="2019-09-26T15:52:51+08:00">2019-09-26</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/09/22/MySQL手记/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/09/22/MySQL手记/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2><span id="1-ji-chu">1.基础</span><a href="#1-ji-chu" class="header-anchor">#</a></h2><h3><span id="1-gui-fan-hua">1.规范化</span><a href="#1-gui-fan-hua" class="header-anchor">#</a></h3><p>第一范式：无重复字段，各字段为最小的逻辑存储单位</p>
+<p>第二范式：if belong 1NF，每一个其他字段完全依赖主键</p>
+<p>第三范式：if belong 1NF,2NF，去除传递依赖</p>
+<h3><span id="2-shu-ju-ku-yin-qing">2.数据库引擎</span><a href="#2-shu-ju-ku-yin-qing" class="header-anchor">#</a></h3><p>默认：InnoDB</p>
+<p>其他：MyISAM等</p>
+<a id="more"></a>
+
+<div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#2-shu-ju-ku">2.数据库</a></li>
+<li><a href="#3-biao">3.表</a><ul>
+<li><a href="#1-zi-duan-lei-xing">1.字段类型</a></li>
+<li><a href="#2-suo-yin">2.索引*</a></li>
+<li><a href="#3-yue-shu">3.约束</a></li>
+<li><a href="#4-zhu-jian">4.主键</a></li>
+</ul>
+</li>
+<li><a href="#4-curd">4.CURD</a></li>
+<li><a href="#5-cha-xun">5.查询</a><ul>
+<li><a href="#1-tiao-jian">1.条件</a><ul>
+<li><a href="#yun-suan-fu">运算符</a></li>
+<li><a href="#tong-pei-fu">通配符</a></li>
+<li><a href="#guan-jian-zi">关键字</a></li>
+</ul>
+</li>
+<li><a href="#2-ju-he-han-shu">2.聚合函数</a></li>
+<li><a href="#3-lian-jie-cha-xun">3.连接查询</a><ul>
+<li><a href="#nei-lian-jie">内连接</a></li>
+<li><a href="#wai-lian-jie">外连接</a></li>
+<li><a href="#quan-wai-lian-jie">全外连接</a></li>
+</ul>
+</li>
+<li><a href="#4-zi-cha-xun">4.子查询</a></li>
+<li><a href="#5-he-bing-cha-xun-jie-guo">5.合并查询结果</a></li>
+<li><a href="#6-zheng-ze-biao-da-shi">6.正则表达式</a></li>
+<li><a href="#7-shi-tu">7.视图</a></li>
+</ul>
+</li>
+<li><a href="#14-cun-chu-guo-cheng-he-cun-chu-han-shu">14.存储过程和存储函数</a></li>
+<li><a href="#15-hong-fa-qi">15.触发器*</a></li>
+<li><a href="#16-shi-jian">16.事件</a></li>
+<li><a href="#17-bei-fen-yu-hui-fu">17.备份与恢复</a></li>
+<li><a href="#18-xing-neng-you-hua">18.性能优化</a><ul>
+<li><a href="#1-fen-jie-biao">1.分解表</a></li>
+<li><a href="#2-zhong-jian-biao">2.中间表*</a></li>
+<li><a href="#3-you-hua-cha-ru-ji-lu-de-su-du">3.优化插入记录的速度</a></li>
+<li><a href="#4-biao-cao-zuo">4.表操作</a></li>
+<li><a href="#5-cha-xun-gao-su-huan-cun">5.查询高速缓存</a></li>
+<li><a href="#6-you-hua-duo-biao-cha-xun">6.优化多表查询</a></li>
+</ul>
+</li>
+<li><a href="#19-quan-xian-guan-li-yu-an-quan">19.权限管理与安全</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h2><span id="2-shu-ju-ku">2.数据库</span><a href="#2-shu-ju-ku" class="header-anchor">#</a></h2><p>创建数据库：create database 数据库名;</p>
+<p>查看所有数据库：show databases;</p>
+<p>选择数据库：use 数据库名;</p>
+<p>删除数据库：drop database 数据库名;</p>
+<h2><span id="3-biao">3.表</span><a href="#3-biao" class="header-anchor">#</a></h2><p>创建表：creat table 表名()</p>
+<p>查看表：show colums from 表名 from 数据库名;</p>
+<p>​                describe 表名；</p>
+<p>修改表：alter table 表名</p>
+<p>重命名表：rename table 表名 to 新表名;</p>
+<p>删除表：drop table 表名;</p>
+<h3><span id="1-zi-duan-lei-xing">1.字段类型</span><a href="#1-zi-duan-lei-xing" class="header-anchor">#</a></h3><p>1.考虑速度，选择固定的列：char</p>
+<p>2.节省空间，使用动态列：varchar</p>
+<p>3.将列中内容限制在一种选择：enum</p>
+<p>4.允许在一列中有多个条目：set</p>
+<p>5.搜索内容不区分大小写：text</p>
+<p>6.搜索内容区分大小写：blob</p>
+<h3><span id="2-suo-yin">2.索引*</span><a href="#2-suo-yin" class="header-anchor">#</a></h3><p><em>默认索引类型：B+ Tree</em></p>
+<p><em>建表时不推荐索引，等到插入数据完成再建索引</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#在已建立的表中创建索引</span><br><span class="line">create [union|fulltext|spatial] index index_name on table_name(属性[(length)][asc|desc]);</span><br></pre></td></tr></table></figure>
+
+<p><em>根据索引查询，可以优化查询速度，但占用物理空间，还影响插入操作。插入数据时可以先删除索引，插入数据后再重建索引</em></p>
+<p>1.普通索引：index(id)</p>
+<p>2.唯一性索引：unique index 索引名(id)</p>
+<p>3.全文索引：fulltext index</p>
+<p><em>只有MyISAM类型数据表支持全文索引，InnoDB不支持</em></p>
+<p><em>只能创建在char，varchar，text类型的字段上</em></p>
+<p><em>推荐使用在数据量大的字符串类型字段</em></p>
+<p>4.单列索引：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create index index_name on table_name(字段名（lenght）)</span><br></pre></td></tr></table></figure>
+
+<p>5.多列索引：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create index index_name on table_name(字段名1,字段名2)</span><br></pre></td></tr></table></figure>
+
+<p>6.空间索引：spatial index</p>
+<p>删除索引：drop index index_name on table_name;</p>
+<h3><span id="3-yue-shu">3.约束</span><a href="#3-yue-shu" class="header-anchor">#</a></h3><p>primary key：主键</p>
+<p>foreign key：外键</p>
+<p>check：设置限定条件</p>
+<h3><span id="4-zhu-jian">4.主键</span><a href="#4-zhu-jian" class="header-anchor">#</a></h3><p><em>一般的：自增,不为空</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id int(11) auto_increment primary key not null；</span><br></pre></td></tr></table></figure>
+
+<p><em>联合主键：</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">primary key(id,classid)；</span><br></pre></td></tr></table></figure>
+
+<h2><span id="4-curd">4.CURD</span><a href="#4-curd" class="header-anchor">#</a></h2><p>插入：insert into 表名(字段名) values (值)</p>
+<p>查询：select 字段名 from 表名 where 条件</p>
+<p>修改：update 表名 set 字段名=新值 where 条件</p>
+<p>删除：delete from 表名 where 条件</p>
+<h2><span id="5-cha-xun">5.查询</span><a href="#5-cha-xun" class="header-anchor">#</a></h2><h3><span id="1-tiao-jian">1.条件</span><a href="#1-tiao-jian" class="header-anchor">#</a></h3><h5><span id="yun-suan-fu">运算符</span><a href="#yun-suan-fu" class="header-anchor">#</a></h5><p>1.&lt;&gt;同!=：判断不相等</p>
+<p>2.is null、is not null、&lt;=&gt;：判空</p>
+<p>3.between n and m：数据是否在某个范围</p>
+<p>4.in：数据是否存在某个集合中</p>
+<p>5.like：匹配字符串</p>
+<p>6.regexp：使用正则表达式匹配字符串</p>
+<p>7.逻辑：&amp;&amp; and 与；|| or 或；! not 非；xor 异或</p>
+<p>8.按位：&amp; 与；| 或；~ 取反；^ 异或；&lt;&lt; 左移；&gt;&gt; 右移</p>
+<h5><span id="tong-pei-fu">通配符</span><a href="#tong-pei-fu" class="header-anchor">#</a></h5><p>1.%：匹配多个</p>
+<p>2._：匹配一个</p>
+<h5><span id="guan-jian-zi">关键字</span><a href="#guan-jian-zi" class="header-anchor">#</a></h5><p>1.group by：分组查询</p>
+<p>2.distinct：消除重复行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select distinct type from tb_book;</span><br></pre></td></tr></table></figure>
+
+<p>3.order by：升序 esc；降序 desc</p>
+<p>4.concat：联合多个字段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select id ,concat(book,&quot;:&quot;,price) as info ,type from tb_book;</span><br></pre></td></tr></table></figure>
+
+<p>5.limit：限制查询结果记录条数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from tb_book order by price desc limit 3;</span><br></pre></td></tr></table></figure>
+
+<h3><span id="2-ju-he-han-shu">2.聚合函数</span><a href="#2-ju-he-han-shu" class="header-anchor">#</a></h3><p>指定字段：</p>
+<p>avg()：平均值</p>
+<p>count()：统计非空记录数</p>
+<p>distinct count()：统计不同记录数</p>
+<p>count (*)：统计所有记录数</p>
+<p>min()：最小值</p>
+<p>max()：最大值</p>
+<p>std()/stdtev()：标准背离值</p>
+<p>sum()：记录的总和</p>
+<h3><span id="3-lian-jie-cha-xun">3.连接查询</span><a href="#3-lian-jie-cha-xun" class="header-anchor">#</a></h3><h5><span id="nei-lian-jie">内连接</span><a href="#nei-lian-jie" class="header-anchor">#</a></h5><h5><span id="wai-lian-jie">外连接</span><a href="#wai-lian-jie" class="header-anchor">#</a></h5><p>左外连接：left join 将左表所有数据分别与右表每一条数据连接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select tb_login.user,book,row from tb_login left join tb_book on tb_login.user=tb_book.user;</span><br></pre></td></tr></table></figure>
+
+<p>右外连接：right join</p>
+<h5><span id="quan-wai-lian-jie">全外连接</span><a href="#quan-wai-lian-jie" class="header-anchor">#</a></h5><h3><span id="4-zi-cha-xun">4.子查询</span><a href="#4-zi-cha-xun" class="header-anchor">#</a></h3><p>in</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from tb_login where user in (select user from tb_book);</span><br></pre></td></tr></table></figure>
+
+<p>比较运算符</p>
+<p>exists</p>
+<p>and</p>
+<p>all</p>
+<h3><span id="5-he-bing-cha-xun-jie-guo">5.合并查询结果</span><a href="#5-he-bing-cha-xun-jie-guo" class="header-anchor">#</a></h3><p><em>即把多列结果合成一列</em></p>
+<p>union（去除重复值）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select user from tb_book</span><br><span class="line">union</span><br><span class="line">select user from tb_login;</span><br></pre></td></tr></table></figure>
+
+<p>union all</p>
+<h3><span id="6-zheng-ze-biao-da-shi">6.正则表达式</span><a href="#6-zheng-ze-biao-da-shi" class="header-anchor">#</a></h3><p>^：以某个特定字符或字符串开头</p>
+<p>$：以某个特定字符或字符串结尾</p>
+<p>.：匹配字符串的任意一个字符</p>
+<p>[字符集合]：匹配字符集合里的任意一个字符</p>
+<p>[^字符集合]：匹配除字符集合外的任意一个字符</p>
+<p>​    <em>包含c~z字母以外的记录：’[ ^c-z]’</em></p>
+<p>S1|S2|S3：匹配S1/S2/S3中的任意一个字符串</p>
+<p>*：匹配多个该符号之前的字符（可以为0）</p>
+<p>​    <em>A字符前出现过J字符的记录：’J*A’</em></p>
+<p>+：匹配多个该符号之前的字符（至少为1）</p>
+<p>字符串{N}：出现N次</p>
+<p>字符串{M,N}：至少出现M次，至多出现N次</p>
+<h3><span id="7-shi-tu">7.视图</span><a href="#7-shi-tu" class="header-anchor">#</a></h3><p><em>由查询定义，需权限</em></p>
+<p>创建视图：creat view 视图名 as select语句；</p>
+<p>查看视图：describe 视图名；</p>
+<p>​                    show table status like ‘视图名’</p>
+<p>删除视图：drop view if exist 视图名；</p>
+<h2><span id="14-cun-chu-guo-cheng-he-cun-chu-han-shu">14.存储过程和存储函数</span><a href="#14-cun-chu-guo-cheng-he-cun-chu-han-shu" class="header-anchor">#</a></h2><p><em>为了保证数据的完整性和一致性</em></p>
+<p>创建存储过程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#定义一个输出变量count_num，存储过程应用select语句从studentinfo表中获取记录数，最后将结果传递给变量count_num</span><br><span class="line">#定义结束符</span><br><span class="line">delimiter // </span><br><span class="line">#输入输出类型[in|out|inout]</span><br><span class="line">#输出变量</span><br><span class="line">#参数类型</span><br><span class="line">create procedure count_student(out count_num int)</span><br><span class="line">read sql data</span><br><span class="line">begin </span><br><span class="line">select count(*) into coun_num from studentinfo;</span><br><span class="line">end</span><br><span class="line">//</span><br></pre></td></tr></table></figure>
+
+<p>调用存储过程：call 存储过程名（参数）</p>
+<h2><span id="15-hong-fa-qi">15.触发器*</span><a href="#15-hong-fa-qi" class="header-anchor">#</a></h2><p>创建触发器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#该触发器的功能为 当向studentinfo表执行insert操作时之前，数据库系统自动向timelog插入当前时间</span><br><span class="line">delimiter //</span><br><span class="line">create tirgger auto_save_time before insert </span><br><span class="line">on studentinfo for each row</span><br><span class="line">begin</span><br><span class="line">insert into timelog(savetime) values(now());</span><br><span class="line">#可以有多条操作语句，只有一条时可省略begin、end</span><br><span class="line">end</span><br><span class="line">//</span><br><span class="line">#sacetime为字段名</span><br></pre></td></tr></table></figure>
+
+<p>查看触发器：show triggers;</p>
+<p>删除触发器：drop trigger 触发器名；</p>
+<h2><span id="16-shi-jian">16.事件</span><a href="#16-shi-jian" class="header-anchor">#</a></h2><p><em>为了周期性地执行某一个命令或者sql语句</em></p>
+<h2><span id="17-bei-fen-yu-hui-fu">17.备份与恢复</span><a href="#17-bei-fen-yu-hui-fu" class="header-anchor">#</a></h2><h2><span id="18-xing-neng-you-hua">18.性能优化</span><a href="#18-xing-neng-you-hua" class="header-anchor">#</a></h2><h3><span id="1-fen-jie-biao">1.分解表</span><a href="#1-fen-jie-biao" class="header-anchor">#</a></h3><p>字段很多，且有些字段使用不频繁，可以将表分解成多个表</p>
+<h3><span id="2-zhong-jian-biao">2.中间表*</span><a href="#2-zhong-jian-biao" class="header-anchor">#</a></h3><p>需要经常查询两个表中的几个字段，可以建立中间表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#将其他表的需要的记录导入中间表中</span><br><span class="line">insert into temp_score select student.id,student.name,score.grade from student,score where student.id = score.stu_id;</span><br></pre></td></tr></table></figure>
+
+<h3><span id="3-you-hua-cha-ru-ji-lu-de-su-du">3.优化插入记录的速度</span><a href="#3-you-hua-cha-ru-ji-lu-de-su-du" class="header-anchor">#</a></h3><p><em>索引，唯一性校验会影响插入记录的速度，根据需要如下操作</em></p>
+<p>禁用索引：alter table 表名 disable keys;</p>
+<p>重启索引：alter table 表名 enable keys;</p>
+<p>禁用唯一性检查：set unique_check=0;</p>
+<p>重启唯一性检查：set unique_check=1;</p>
+<p>优化insert语句</p>
+<p><em>一条insert语句插入多条记录比执行多条insert语句插入多条记录速度快，因为减少了与数据库之间的连接操作。</em></p>
+<h3><span id="4-biao-cao-zuo">4.表操作</span><a href="#4-biao-cao-zuo" class="header-anchor">#</a></h3><p>分析表：analyze table 表名</p>
+<p>检查表：check table 表名</p>
+<p><em>检查表是否存在错误</em></p>
+<p>优化表：optimize table 表名</p>
+<p><em>消除删除和更新造成的磁盘碎片，从而减少空间的浪费</em></p>
+<h3><span id="5-cha-xun-gao-su-huan-cun">5.查询高速缓存</span><a href="#5-cha-xun-gao-su-huan-cun" class="header-anchor">#</a></h3><p><em>首次查询，结果集会保存到高速缓存，再次执行相同查询可从高速缓存中检索</em></p>
+<p>检查高速缓存是否开启：show variables like ‘%query_cache%’</p>
+<h3><span id="6-you-hua-duo-biao-cha-xun">6.优化多表查询</span><a href="#6-you-hua-duo-biao-cha-xun" class="header-anchor">#</a></h3><p><em>子查询替代内连接</em></p>
+<h2><span id="19-quan-xian-guan-li-yu-an-quan">19.权限管理与安全</span><a href="#19-quan-xian-guan-li-yu-an-quan" class="header-anchor">#</a></h2>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/09/20/Hexo+Github搭建个人博客/" rel="next" title="Hexo+Github搭建个人博客">
+                  <i class="fa fa-chevron-left"></i> Hexo+Github搭建个人博客
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/09/25/SpringMVC从零开始/" rel="prev" title="SpringMVC从零开始">
+                  SpringMVC从零开始 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="comments"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">1.基础#</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.1.</span> <span class="nav-text">1.规范化#</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.2.</span> <span class="nav-text">2.数据库引擎#</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">2.数据库#</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">3.表#</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">3.1.</span> <span class="nav-text">1.字段类型#</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">3.2.</span> <span class="nav-text">2.索引*#</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">3.3.</span> <span class="nav-text">3.约束#</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">3.4.</span> <span class="nav-text">4.主键#</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">4.</span> <span class="nav-text">4.CURD#</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">5.</span> <span class="nav-text">5.查询#</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">5.1.</span> <span class="nav-text">1.条件#</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">5.1.0.1.</span> <span class="nav-text">运算符#</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">5.1.0.2.</span> <span class="nav-text">通配符#</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">5.1.0.3.</span> <span class="nav-text">关键字#</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">5.2.</span> <span class="nav-text">2.聚合函数#</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">5.3.</span> <span class="nav-text">3.连接查询#</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">5.3.0.1.</span> <span class="nav-text">内连接#</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">5.3.0.2.</span> <span class="nav-text">外连接#</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">5.3.0.3.</span> <span class="nav-text">全外连接#</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">5.4.</span> <span class="nav-text">4.子查询#</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">5.5.</span> <span class="nav-text">5.合并查询结果#</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">5.6.</span> <span class="nav-text">6.正则表达式#</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">5.7.</span> <span class="nav-text">7.视图#</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">6.</span> <span class="nav-text">14.存储过程和存储函数#</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">7.</span> <span class="nav-text">15.触发器*#</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">8.</span> <span class="nav-text">16.事件#</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">9.</span> <span class="nav-text">17.备份与恢复#</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">10.</span> <span class="nav-text">18.性能优化#</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">10.1.</span> <span class="nav-text">1.分解表#</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">10.2.</span> <span class="nav-text">2.中间表*#</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">10.3.</span> <span class="nav-text">3.优化插入记录的速度#</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">10.4.</span> <span class="nav-text">4.表操作#</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">10.5.</span> <span class="nav-text">5.查询高速缓存#</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">10.6.</span> <span class="nav-text">6.优化多表查询#</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">11.</span> <span class="nav-text">19.权限管理与安全#</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="张小臻"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">张小臻</p>
+  <div class="site-description" itemprop="description">张小臻的个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/git-zhz" title="GitHub → https://github.com/git-zhz" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/2391090827" title="Weibo → https://weibo.com/u/2391090827" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张小臻</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.5.0
+  </div>
+
+        
+
+
+  <div style="display: none;">
+    <script pjax src="//s95.cnzz.com/z_stat.php?id=1278227824&web_id=1278227824"></script>
+  </div>
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'SgWGWV1XUdEtKgpJrb1WmU7T-gzGzoHsz',
+    appKey: 'Qddfaeqz2veG3HxlpgGPdTU5',
+    placeholder: "Just go go",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+    </div>
+</body>
+</html>
