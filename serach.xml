@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>test</title>
+    <url>/2019/11/21/test/</url>
+    <content><![CDATA[<p>测试</p>
+<p>测试</p>
+<p>测试</p>
+]]></content>
+      <categories>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>mybatis java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java加密</title>
+    <url>/2019/10/29/Java%E5%8A%A0%E5%AF%86/</url>
+    <content><![CDATA[<h2><span id="yi-huo">异或</span><a href="#yi-huo" class="header-anchor">#</a></h2><p>可逆</p>
+<p>1.同为0，异为1</p>
+<p>2.一个数，两次异或之后，是原数本身</p>
+<p>“xxxxxx”异或一次：加密</p>
+<p>“xxxxxx”再异或一次：解密</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">xor</span><span class="params">(String input)</span></span>&#123;</span><br><span class="line">    <span class="comment">//把字符串变为字符数组</span></span><br><span class="line">    <span class="keyword">char</span>[] cha = input.toCharArray();</span><br><span class="line">    <span class="comment">//逐位异或</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;chs.length;i++)&#123;</span><br><span class="line">        chs[i] = (<span class="keyword">char</span>)(chs[i]^<span class="number">3000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//把字符数组变为字符串</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> String(chs);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		String str = <span class="string">"hello"</span>;</span><br><span class="line">		str = xor(str);</span><br><span class="line">		System.out.println(str);		</span><br><span class="line">		str = xor(str);</span><br><span class="line">		System.out.println(str);		</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2><span id="md5">MD5</span><a href="#md5" class="header-anchor">#</a></h2><p>不可逆，速度较快</p>
+<p>字符串（字节数组）–&gt;十六进制字符串</p>
+<p>引入commons-codec-1.9.jar</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">md5Encode</span><span class="params">(<span class="keyword">byte</span>[] input)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> DigestUtil.md5Hex(input);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">mian</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    String str = <span class="string">"hello"</span>;</span><br><span class="line">	str = md5Encode(str.getByte());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2><span id="sha256">SHA256</span><a href="#sha256" class="header-anchor">#</a></h2><p>不可逆，安全性较高</p>
+<p>字符串（字节数组）–&gt;十六进制字符串</p>
+<p>引入commons-codec-1.9.jar</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">sha256Encode</span><span class="params">(<span class="keyword">byte</span>[] input)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> DigestUtil.sha256Hex(input);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">mian</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    String str = <span class="string">"hello"</span>;</span><br><span class="line">	str = md5Encode(str.getByte());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>MyBatis从零开始</title>
+    <url>/2019/10/05/MyBatis%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B/</url>
+    <content><![CDATA[<p>定位：操作dao层，简化jdbc操作，实现数据持久化。实现ORM，使程序员像操作对象一样操作表。</p>
+<p>ORM：对象关系映射，对象和表一一映射。</p>
+<a id="more"></a>
+
+<!--toc-->
+
+<h2><span id="di-yi-ge-shi-li">第一个示例</span><a href="#di-yi-ge-shi-li" class="header-anchor">#</a></h2><h3><span id="1-dao-ru-jar-bao">1.导入jar包</span><a href="#1-dao-ru-jar-bao" class="header-anchor">#</a></h3><p>mybatis、jdbc驱动</p>
+<h3><span id="1-chuang-jian-shu-ju-ku-biao">1.创建数据库、表</span><a href="#1-chuang-jian-shu-ju-ku-biao" class="header-anchor">#</a></h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#创建数据库</span><br><span class="line">create database mybatestest</span><br><span class="line">#创建表</span><br><span class="line">create table t_user（Uid,Uname,Upwd）</span><br><span class="line">#插入数据</span><br></pre></td></tr></table></figure>
+
+<h3><span id="2-chuang-jian-dui-xiang">2.创建对象</span><a href="#2-chuang-jian-dui-xiang" class="header-anchor">#</a></h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//User.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> Uid;</span><br><span class="line">	<span class="keyword">private</span> String Uname;</span><br><span class="line">	<span class="keyword">private</span> String Upwd;</span><br><span class="line">    <span class="comment">//构造器，Getter and Setter方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3><span id="3-pei-zhi-ying-she-wen-jian">3.配置映射文件</span><a href="#3-pei-zhi-ying-she-wen-jian" class="header-anchor">#</a></h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--userMapper.xml--&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mapper</span></span><br><span class="line"><span class="meta">  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"</span></span><br><span class="line"><span class="meta">  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"com.mybatis.entity.userMapper"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--添加增删改查标签--&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--id，返回类型，传值类型--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectUser"</span> <span class="attr">resultType</span>=<span class="string">"com.mybatis.entity.User"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--SQL语句--&gt;</span></span><br><span class="line">    select * from t_user where Uid = #&#123;id&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3><span id="4-pei-zhi-mybatis">4.配置mybatis</span><a href="#4-pei-zhi-mybatis" class="header-anchor">#</a></h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--conf.xml--&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE configuration</span></span><br><span class="line"><span class="meta">  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"</span></span><br><span class="line"><span class="meta">  "http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">"JDBC"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"POOLED"</span>&gt;</span></span><br><span class="line">      	<span class="comment">&lt;!-- 配置数据库信息 --&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--jdbc驱动，要先引入jdbc的jar包--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql://localhost:3306/mybatistest？serverTimezone=UTC&amp;amp;characterEncoding=utf-8"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"root"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"1214"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">  	<span class="comment">&lt;!-- 加载映射文件 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">"com/mybatis/entity/userMapper.xml"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3><span id="5-ce-shi-lei">5.测试类</span><a href="#5-ce-shi-lei" class="header-anchor">#</a></h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">    	<span class="comment">//加载MyBatis配置文件（为了访问数据库）</span></span><br><span class="line">		Reader reader = Resources.getResourceAsReader(<span class="string">"conf.xml"</span>);</span><br><span class="line">		SqlSessionFactory sessionFactiory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(reader);</span><br><span class="line">		<span class="comment">//session - connection</span></span><br><span class="line">    	SqlSession session = sessionFactiory.openSession();</span><br><span class="line">    	<span class="comment">//映射文件的路径：namespace.id</span></span><br><span class="line">		String statement = <span class="string">"com.mybatis.entity.userMapper.selectUser"</span>;</span><br><span class="line">    	<span class="comment">//传入路径和参数</span></span><br><span class="line">		User user = session.selectOne(statement,<span class="number">1</span>);</span><br><span class="line">    	<span class="comment">//打印</span></span><br><span class="line">		System.out.println(user.getUid()+<span class="string">","</span>+user.getUname()+<span class="string">","</span>+user.getUpwd());</span><br><span class="line">		session.close();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>SpringMVC从零开始</title>
+    <url>/2019/09/25/SpringMVC%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B/</url>
+    <content><![CDATA[<p>定位：servlet</p>
+<p>流程：jsp-&gt;servlet(SpringMVC)-&gt;jsp</p>
+<a id="more"></a>
+
+<div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#di-yi-ge-shi-li">第一个示例：</a><ul>
+<li><a href="#servlet-shi-xian-qu-fen">Servlet实现（区分）</a></li>
+<li><a href="#springmvc-shi-xian">SpringMVC实现</a><ul>
+<li><a href="#1-tian-jia-bi-yao-bao-jar">1.添加必要包（jar）</a></li>
+<li><a href="#2-springmvc-pei-zhi-wen-jian-ji-ben-she-zhi">2.SpringMVC配置文件基本设置</a></li>
+<li><a href="#3-web-xml-pei-zhi-wen-jian">3.web.xml配置文件</a></li>
+<li><a href="#4-kong-zhi-qi-lei">4.控制器类</a></li>
+<li><a href="#5-pei-zhi-springmvc-pei-zhi-wen-jian">5.配置SpringMVC配置文件</a></li>
+<li><a href="#6-liu-cheng-shu-li">6.流程梳理</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#zhu-jie">注解</a><ul>
+<li><a href="#requestmapping-ying-she">@RequestMapping（映射）</a><ul>
+<li><a href="#1-ying-she-lu-jing">1.映射路径</a></li>
+<li><a href="#2-qing-qiu-fang-shi-method">2.请求方式：method</a></li>
+<li><a href="#3-can-shu-zhi-params">3.参数值：params</a></li>
+</ul>
+</li>
+<li><a href="#pathvariable-huo-qu-dong-tai-can-shu">@PathVariable（获取动态参数）</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h2><span id="di-yi-ge-shi-li">第一个示例：</span><a href="#di-yi-ge-shi-li" class="header-anchor">#</a></h2><p>我们先写两个jsp页面，要从一个jsp跳转到另一个</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--index.jsp发出welcome跳转请求--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"welcome"</span>&gt;</span>springmvc-welcome<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>目标页面</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--/views/success.jsp--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Holle SpringMVC!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>当我们点击<code>href</code>链接时，SpringMVC的任务是拦截这个跳转请求并处理,并跳转到目标页面。</p>
+<h3><span id="servlet-shi-xian-qu-fen">Servlet实现（区分）</span><a href="#servlet-shi-xian-qu-fen" class="header-anchor">#</a></h3><p>普通的Servlet通过<code>&lt;url-pattern&gt;</code>拦截请求，然后交给对应的Servlet处理</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--web.xml--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">description</span>&gt;</span><span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">display-name</span>&gt;</span>Test<span class="tag">&lt;/<span class="name">display-name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>Test<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span><span class="comment">&lt;!--name--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>Test.Test<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span><span class="comment">&lt;!--2.处理--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>Test<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span><span class="comment">&lt;!--name相对应映射--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">urI-pattern</span>&gt;</span>/Test<span class="tag">&lt;/<span class="name">urI-pattern</span>&gt;</span><span class="comment">&lt;!--1.拦截--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3><span id="springmvc-shi-xian">SpringMVC实现</span><a href="#springmvc-shi-xian" class="header-anchor">#</a></h3><h4><span id="1-tian-jia-bi-yao-bao-jar">1.添加必要包（jar）</span><a href="#1-tian-jia-bi-yao-bao-jar" class="header-anchor">#</a></h4><p>Spring包：spring-aop.jar、spring-bean.jar、spring-core.jar、spring-context.jar、spring-web.jar、commons-logging.jar</p>
+<p>SpringMVC包（依赖于Spring包）：spring-webmvc.jar</p>
+<h4><span id="2-springmvc-pei-zhi-wen-jian-ji-ben-she-zhi">2.SpringMVC配置文件基本设置</span><a href="#2-springmvc-pei-zhi-wen-jian-ji-ben-she-zhi" class="header-anchor">#</a></h4><p>默认命名：springDispatcherServlet-servlet.xml</p>
+<p>默认路径：/WEB-INF/</p>
+<p>选中常用的命名空间：beans、aop、context、mvc</p>
+<h4><span id="3-web-xml-pei-zhi-wen-jian">3.web.xml配置文件</span><a href="#3-web-xml-pei-zhi-wen-jian" class="header-anchor">#</a></h4><p>目的：拦截所有请求交给SpringMVC处理，不用配置每一个<code>&lt;url-pattern&gt;</code>拦截，直接找DispatcherServlet配置</p>
+<p>首先配置spring-webmvc.jar里面自带的Servlet(DispatcherServlet——SpringMVC的入口)</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--web.xml--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>springDispatcherServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span><span class="comment">&lt;!--name--&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--拦截到的请求由DispatcherServlet处理--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span><span class="comment">&lt;!--启动时以第一个身份启动--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>springDispatcherServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span><span class="comment">&lt;!--与name相对应映射--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span><span class="comment">&lt;!--拦截所有请求，注意不是/*--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping〉</span></span></span><br></pre></td></tr></table></figure>
+
+<p>如果springmvc配置文件不在默认位置需要以下声明</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--web.xml--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--初始化参数,声明mvc配置文件位置--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span><span class="comment">&lt;!--定位方法名--&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>classpath:springmvcname.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>可以通过设置<code>&lt;url-pattern&gt;/&lt;/url-pattern&gt;</code>，决定需要拦截的请求</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--拦截&lt;a href="/test/welcome"&gt;,拦截/test开头的请求--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/test<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--拦截&lt;a href="welcome.action"&gt;,拦截.action结尾的请求--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>.action<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--也可以拦截具体请求--&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4><span id="4-kong-zhi-qi-lei">4.控制器类</span><a href="#4-kong-zhi-qi-lei" class="header-anchor">#</a></h4><p>目的：通过注解拦截请求，具体方法实现</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//SpringMVCHandler.java控制器拦截请求(action)</span></span><br><span class="line"><span class="meta">@Controller</span><span class="comment">//声明这是一个控制器类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringMVCHandler</span></span>&#123;</span><br><span class="line">	<span class="meta">@RequestMapping</span>(<span class="string">"welcome"</span>)<span class="comment">//拦截welcome请求</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">welcome</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"success"</span><span class="comment">//返回结果</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4><span id="5-pei-zhi-springmvc-pei-zhi-wen-jian">5.配置SpringMVC配置文件</span><a href="#5-pei-zhi-springmvc-pei-zhi-wen-jian" class="header-anchor">#</a></h4><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--扫描器：有注解的类必须把所在包名添加到扫描器里面--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>&gt;</span>"packagename"<span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--配置视图解析器：为返回的字段拼接上前后缀--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.view.InternalResourceViewResolver"</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--前缀--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"prefix"</span> <span class="attr">value</span>=<span class="string">"/views/"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--后缀--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"suffix"</span> <span class="attr">value</span>=<span class="string">".jsp"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--处理结果为/views/success.jsp（目标页面）,然后跳转--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4><span id="6-liu-cheng-shu-li">6.流程梳理</span><a href="#6-liu-cheng-shu-li" class="header-anchor">#</a></h4><p>1.配置web.xml告知程序，拦截的请求交由SpringMVC处理</p>
+<p>2.控制器类通过注解，就能拦截对应的请求，返回对应结果</p>
+<p>3.配置SpringMVC配置文件，对返回的结果进行处理</p>
+<h2><span id="zhu-jie">注解</span><a href="#zhu-jie" class="header-anchor">#</a></h2><h3><span id="requestmapping-ying-she">@RequestMapping（映射）</span><a href="#requestmapping-ying-she" class="header-anchor">#</a></h3><h4><span id="1-ying-she-lu-jing">1.映射路径</span><a href="#1-ying-she-lu-jing" class="header-anchor">#</a></h4><p>@RequestMapping注解也可以添加到类名前面，这样拦截的就是这一个类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"handle"</span>)<span class="comment">//映射</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringMVCHandler</span></span>&#123;</span><br><span class="line">	<span class="meta">@RequestMapping</span>(<span class="string">"welcome"</span>)<span class="comment">//映射</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">welcome</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"success"</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么发出的请求要这样写，映射是去与@RequestMapping注解匹配，可以与方法名、类名不一致</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--index.jsp发出welcome跳转请求--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--"handle/welcome"为映射路径--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"handle/welcome"</span>&gt;</span>springmvc-welcome<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>ant风格的请求路径：</p>
+<p>？：单个字符。<em>：任意个字符。*</em>：任意目录</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"welcome/xxx/yyy/zzz/abc"</span></span></span><br></pre></td></tr></table></figure>
+
+<p>可被以下写法拦截</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"welcome/**/a?c"</span>)</span><br></pre></td></tr></table></figure>
+
+<h4><span id="2-qing-qiu-fang-shi-method">2.请求方式：method</span><a href="#2-qing-qiu-fang-shi-method" class="header-anchor">#</a></h4><p>默认值：value（有多个参数时要写出来，k-v形式）</p>
+<p>链接的默认请求方式：GET</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"handle"</span>,method=RequestMethod.POST)<span class="comment">//指定拦截方式为POST，即拦截不到GET请求</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringMVCHandler</span></span>&#123;</span><br><span class="line">	<span class="meta">@RequestMapping</span>(value=<span class="string">"welcome"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">welcome</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"success"</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>POST请求方式：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--index.jsp--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">from</span> <span class="attr">action</span>=<span class="string">"handle/welcome"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"welcome"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">from</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4><span id="3-can-shu-zhi-params">3.参数值：params</span><a href="#3-can-shu-zhi-params" class="header-anchor">#</a></h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1.拦截的路径里面必须包含name参数,不能包含sb参数</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"handle"</span>,method=RequestMethod.POST,params=&#123;<span class="string">"name"</span>，<span class="string">"!sb"</span>&#125;)</span><br><span class="line"><span class="comment">//2.拦截的路径里面必须包含name参数且值为admin</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"handle"</span>,method=RequestMethod.POST,params=&#123;<span class="string">"name=admin"</span>&#125;)</span><br><span class="line"><span class="comment">//3.拦截的路径里面有其中一个参数即可，但值要相对应。其中age参数，值不能为23</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"handle"</span>,method=RequestMethod.POST,params=&#123;<span class="string">"name=text"</span>,<span class="string">"age!=23"</span>&#125;)</span><br><span class="line"><span class="comment">//4.可对请求头信息进行约定</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"handle"</span>,header=&#123;<span class="string">"k1=v1"</span>,<span class="string">"k2=v2"</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>添加<code>name=&quot;name&quot;</code>参数</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--index.jsp--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">from</span> <span class="attr">action</span>=<span class="string">"handle/welcome"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></span><br><span class="line">    name:<span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"name"</span>&gt;</span><span class="comment">&lt;!--当输入值为admin时才能被第2种写法拦截成功--&gt;</span></span><br><span class="line">    age:<span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"age"</span>&gt;</span><span class="comment">&lt;!--当输入值为23时第3种写法拦截失败--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"welcome"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">from</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3><span id="pathvariable-huo-qu-dong-tai-can-shu">@PathVariable（获取动态参数）</span><a href="#pathvariable-huo-qu-dong-tai-can-shu" class="header-anchor">#</a></h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--index.jsp--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"handler/welcome/admin"</span>&gt;</span>springmvc-welcome<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="comment">&lt;!--admin为传的值--&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//这个name与@PathVariable("name")对应，获得值admin</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"welcome/&#123;name&#125;"</span>)</span><br><span class="line"><span class="comment">//将获得的admin传到@PathVariable修饰的String name</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">SpringMVCHandler</span><span class="params">(@PathVariable(<span class="string">"name"</span>)</span> String name)</span>&#123;</span><br><span class="line">	System.out.println(name);<span class="comment">//控制台输出admin</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>普通写法（区分）</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--index.jsp--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"handler/welcome?admin"</span>&gt;</span>springmvc-welcome<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="comment">&lt;!--admin为传的值--&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"welcome"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">SpringMVCHandler</span><span class="params">()</span></span>&#123;</span><br><span class="line">	String name = request.getParameter(<span class="string">"name"</span>)</span><br><span class="line">	System.out.println(name);<span class="comment">//控制台输出admin</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>MySQL手记</title>
+    <url>/2019/09/22/MySQL%E6%89%8B%E8%AE%B0/</url>
+    <content><![CDATA[<h2><span id="1-ji-chu">1.基础</span><a href="#1-ji-chu" class="header-anchor">#</a></h2><h3><span id="1-gui-fan-hua">1.规范化</span><a href="#1-gui-fan-hua" class="header-anchor">#</a></h3><p>第一范式：无重复字段，各字段为最小的逻辑存储单位</p>
+<p>第二范式：if belong 1NF，每一个其他字段完全依赖主键</p>
+<p>第三范式：if belong 1NF,2NF，去除传递依赖</p>
+<h3><span id="2-shu-ju-ku-yin-qing">2.数据库引擎</span><a href="#2-shu-ju-ku-yin-qing" class="header-anchor">#</a></h3><p>默认：InnoDB</p>
+<p>其他：MyISAM等</p>
+<a id="more"></a>
+
+<div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#2-shu-ju-ku">2.数据库</a></li>
+<li><a href="#3-biao">3.表</a><ul>
+<li><a href="#1-zi-duan-lei-xing">1.字段类型</a></li>
+<li><a href="#2-suo-yin">2.索引*</a></li>
+<li><a href="#3-yue-shu">3.约束</a></li>
+<li><a href="#4-zhu-jian">4.主键</a></li>
+</ul>
+</li>
+<li><a href="#4-curd">4.CURD</a></li>
+<li><a href="#5-cha-xun">5.查询</a><ul>
+<li><a href="#1-tiao-jian">1.条件</a><ul>
+<li><a href="#yun-suan-fu">运算符</a></li>
+<li><a href="#tong-pei-fu">通配符</a></li>
+<li><a href="#guan-jian-zi">关键字</a></li>
+</ul>
+</li>
+<li><a href="#2-ju-he-han-shu">2.聚合函数</a></li>
+<li><a href="#3-lian-jie-cha-xun">3.连接查询</a><ul>
+<li><a href="#nei-lian-jie">内连接</a></li>
+<li><a href="#wai-lian-jie">外连接</a></li>
+<li><a href="#quan-wai-lian-jie">全外连接</a></li>
+</ul>
+</li>
+<li><a href="#4-zi-cha-xun">4.子查询</a></li>
+<li><a href="#5-he-bing-cha-xun-jie-guo">5.合并查询结果</a></li>
+<li><a href="#6-zheng-ze-biao-da-shi">6.正则表达式</a></li>
+<li><a href="#7-shi-tu">7.视图</a></li>
+</ul>
+</li>
+<li><a href="#14-cun-chu-guo-cheng-he-cun-chu-han-shu">14.存储过程和存储函数</a></li>
+<li><a href="#15-hong-fa-qi">15.触发器*</a></li>
+<li><a href="#16-shi-jian">16.事件</a></li>
+<li><a href="#17-bei-fen-yu-hui-fu">17.备份与恢复</a></li>
+<li><a href="#18-xing-neng-you-hua">18.性能优化</a><ul>
+<li><a href="#1-fen-jie-biao">1.分解表</a></li>
+<li><a href="#2-zhong-jian-biao">2.中间表*</a></li>
+<li><a href="#3-you-hua-cha-ru-ji-lu-de-su-du">3.优化插入记录的速度</a></li>
+<li><a href="#4-biao-cao-zuo">4.表操作</a></li>
+<li><a href="#5-cha-xun-gao-su-huan-cun">5.查询高速缓存</a></li>
+<li><a href="#6-you-hua-duo-biao-cha-xun">6.优化多表查询</a></li>
+</ul>
+</li>
+<li><a href="#19-quan-xian-guan-li-yu-an-quan">19.权限管理与安全</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h2><span id="2-shu-ju-ku">2.数据库</span><a href="#2-shu-ju-ku" class="header-anchor">#</a></h2><p>创建数据库：create database 数据库名;</p>
+<p>查看所有数据库：show databases;</p>
+<p>选择数据库：use 数据库名;</p>
+<p>删除数据库：drop database 数据库名;</p>
+<h2><span id="3-biao">3.表</span><a href="#3-biao" class="header-anchor">#</a></h2><p>创建表：creat table 表名()</p>
+<p>查看表：show colums from 表名 from 数据库名;</p>
+<p>​                describe 表名；</p>
+<p>修改表：alter table 表名</p>
+<p>重命名表：rename table 表名 to 新表名;</p>
+<p>删除表：drop table 表名;</p>
+<h3><span id="1-zi-duan-lei-xing">1.字段类型</span><a href="#1-zi-duan-lei-xing" class="header-anchor">#</a></h3><p>1.考虑速度，选择固定的列：char</p>
+<p>2.节省空间，使用动态列：varchar</p>
+<p>3.将列中内容限制在一种选择：enum</p>
+<p>4.允许在一列中有多个条目：set</p>
+<p>5.搜索内容不区分大小写：text</p>
+<p>6.搜索内容区分大小写：blob</p>
+<h3><span id="2-suo-yin">2.索引*</span><a href="#2-suo-yin" class="header-anchor">#</a></h3><p><em>默认索引类型：B+ Tree</em></p>
+<p><em>建表时不推荐索引，等到插入数据完成再建索引</em></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#在已建立的表中创建索引</span><br><span class="line">create [union|fulltext|spatial] index index_name on table_name(属性[(length)][asc|desc]);</span><br></pre></td></tr></table></figure>
+
+<p><em>根据索引查询，可以优化查询速度，但占用物理空间，还影响插入操作。插入数据时可以先删除索引，插入数据后再重建索引</em></p>
+<p>1.普通索引：index(id)</p>
+<p>2.唯一性索引：unique index 索引名(id)</p>
+<p>3.全文索引：fulltext index</p>
+<p><em>只有MyISAM类型数据表支持全文索引，InnoDB不支持</em></p>
+<p><em>只能创建在char，varchar，text类型的字段上</em></p>
+<p><em>推荐使用在数据量大的字符串类型字段</em></p>
+<p>4.单列索引：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">create index index_name on table_name(字段名（lenght）)</span><br></pre></td></tr></table></figure>
+
+<p>5.多列索引：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">create index index_name on table_name(字段名1,字段名2)</span><br></pre></td></tr></table></figure>
+
+<p>6.空间索引：spatial index</p>
+<p>删除索引：drop index index_name on table_name;</p>
+<h3><span id="3-yue-shu">3.约束</span><a href="#3-yue-shu" class="header-anchor">#</a></h3><p>primary key：主键</p>
+<p>foreign key：外键</p>
+<p>check：设置限定条件</p>
+<h3><span id="4-zhu-jian">4.主键</span><a href="#4-zhu-jian" class="header-anchor">#</a></h3><p><em>一般的：自增,不为空</em></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">id int(11) auto_increment primary key not null；</span><br></pre></td></tr></table></figure>
+
+<p><em>联合主键：</em></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">primary key(id,classid)；</span><br></pre></td></tr></table></figure>
+
+<h2><span id="4-curd">4.CURD</span><a href="#4-curd" class="header-anchor">#</a></h2><p>插入：insert into 表名(字段名) values (值)</p>
+<p>查询：select 字段名 from 表名 where 条件</p>
+<p>修改：update 表名 set 字段名=新值 where 条件</p>
+<p>删除：delete from 表名 where 条件</p>
+<h2><span id="5-cha-xun">5.查询</span><a href="#5-cha-xun" class="header-anchor">#</a></h2><h3><span id="1-tiao-jian">1.条件</span><a href="#1-tiao-jian" class="header-anchor">#</a></h3><h5><span id="yun-suan-fu">运算符</span><a href="#yun-suan-fu" class="header-anchor">#</a></h5><p>1.&lt;&gt;同!=：判断不相等</p>
+<p>2.is null、is not null、&lt;=&gt;：判空</p>
+<p>3.between n and m：数据是否在某个范围</p>
+<p>4.in：数据是否存在某个集合中</p>
+<p>5.like：匹配字符串</p>
+<p>6.regexp：使用正则表达式匹配字符串</p>
+<p>7.逻辑：&amp;&amp; and 与；|| or 或；! not 非；xor 异或</p>
+<p>8.按位：&amp; 与；| 或；~ 取反；^ 异或；&lt;&lt; 左移；&gt;&gt; 右移</p>
+<h5><span id="tong-pei-fu">通配符</span><a href="#tong-pei-fu" class="header-anchor">#</a></h5><p>1.%：匹配多个</p>
+<p>2._：匹配一个</p>
+<h5><span id="guan-jian-zi">关键字</span><a href="#guan-jian-zi" class="header-anchor">#</a></h5><p>1.group by：分组查询</p>
+<p>2.distinct：消除重复行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select distinct type from tb_book;</span><br></pre></td></tr></table></figure>
+
+<p>3.order by：升序 esc；降序 desc</p>
+<p>4.concat：联合多个字段</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select id ,concat(book,&quot;:&quot;,price) as info ,type from tb_book;</span><br></pre></td></tr></table></figure>
+
+<p>5.limit：限制查询结果记录条数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select * from tb_book order by price desc limit 3;</span><br></pre></td></tr></table></figure>
+
+<h3><span id="2-ju-he-han-shu">2.聚合函数</span><a href="#2-ju-he-han-shu" class="header-anchor">#</a></h3><p>指定字段：</p>
+<p>avg()：平均值</p>
+<p>count()：统计非空记录数</p>
+<p>distinct count()：统计不同记录数</p>
+<p>count (*)：统计所有记录数</p>
+<p>min()：最小值</p>
+<p>max()：最大值</p>
+<p>std()/stdtev()：标准背离值</p>
+<p>sum()：记录的总和</p>
+<h3><span id="3-lian-jie-cha-xun">3.连接查询</span><a href="#3-lian-jie-cha-xun" class="header-anchor">#</a></h3><h5><span id="nei-lian-jie">内连接</span><a href="#nei-lian-jie" class="header-anchor">#</a></h5><h5><span id="wai-lian-jie">外连接</span><a href="#wai-lian-jie" class="header-anchor">#</a></h5><p>左外连接：left join 将左表所有数据分别与右表每一条数据连接</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select tb_login.user,book,row from tb_login left join tb_book on tb_login.user=tb_book.user;</span><br></pre></td></tr></table></figure>
+
+<p>右外连接：right join</p>
+<h5><span id="quan-wai-lian-jie">全外连接</span><a href="#quan-wai-lian-jie" class="header-anchor">#</a></h5><h3><span id="4-zi-cha-xun">4.子查询</span><a href="#4-zi-cha-xun" class="header-anchor">#</a></h3><p>in</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select * from tb_login where user in (select user from tb_book);</span><br></pre></td></tr></table></figure>
+
+<p>比较运算符</p>
+<p>exists</p>
+<p>and</p>
+<p>all</p>
+<h3><span id="5-he-bing-cha-xun-jie-guo">5.合并查询结果</span><a href="#5-he-bing-cha-xun-jie-guo" class="header-anchor">#</a></h3><p><em>即把多列结果合成一列</em></p>
+<p>union（去除重复值）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select user from tb_book</span><br><span class="line">union</span><br><span class="line">select user from tb_login;</span><br></pre></td></tr></table></figure>
+
+<p>union all</p>
+<h3><span id="6-zheng-ze-biao-da-shi">6.正则表达式</span><a href="#6-zheng-ze-biao-da-shi" class="header-anchor">#</a></h3><p>^：以某个特定字符或字符串开头</p>
+<p>$：以某个特定字符或字符串结尾</p>
+<p>.：匹配字符串的任意一个字符</p>
+<p>[字符集合]：匹配字符集合里的任意一个字符</p>
+<p>[^字符集合]：匹配除字符集合外的任意一个字符</p>
+<p>​    <em>包含c~z字母以外的记录：’[ ^c-z]’</em></p>
+<p>S1|S2|S3：匹配S1/S2/S3中的任意一个字符串</p>
+<p>*：匹配多个该符号之前的字符（可以为0）</p>
+<p>​    <em>A字符前出现过J字符的记录：’J*A’</em></p>
+<p>+：匹配多个该符号之前的字符（至少为1）</p>
+<p>字符串{N}：出现N次</p>
+<p>字符串{M,N}：至少出现M次，至多出现N次</p>
+<h3><span id="7-shi-tu">7.视图</span><a href="#7-shi-tu" class="header-anchor">#</a></h3><p><em>由查询定义，需权限</em></p>
+<p>创建视图：creat view 视图名 as select语句；</p>
+<p>查看视图：describe 视图名；</p>
+<p>​                    show table status like ‘视图名’</p>
+<p>删除视图：drop view if exist 视图名；</p>
+<h2><span id="14-cun-chu-guo-cheng-he-cun-chu-han-shu">14.存储过程和存储函数</span><a href="#14-cun-chu-guo-cheng-he-cun-chu-han-shu" class="header-anchor">#</a></h2><p><em>为了保证数据的完整性和一致性</em></p>
+<p>创建存储过程</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#定义一个输出变量count_num，存储过程应用select语句从studentinfo表中获取记录数，最后将结果传递给变量count_num</span><br><span class="line">#定义结束符</span><br><span class="line">delimiter // </span><br><span class="line">#输入输出类型[in|out|inout]</span><br><span class="line">#输出变量</span><br><span class="line">#参数类型</span><br><span class="line">create procedure count_student(out count_num int)</span><br><span class="line">read sql data</span><br><span class="line">begin </span><br><span class="line">select count(*) into coun_num from studentinfo;</span><br><span class="line">end</span><br><span class="line">//</span><br></pre></td></tr></table></figure>
+
+<p>调用存储过程：call 存储过程名（参数）</p>
+<h2><span id="15-hong-fa-qi">15.触发器*</span><a href="#15-hong-fa-qi" class="header-anchor">#</a></h2><p>创建触发器</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#该触发器的功能为 当向studentinfo表执行insert操作时之前，数据库系统自动向timelog插入当前时间</span><br><span class="line">delimiter //</span><br><span class="line">create tirgger auto_save_time before insert </span><br><span class="line">on studentinfo for each row</span><br><span class="line">begin</span><br><span class="line">insert into timelog(savetime) values(now());</span><br><span class="line">#可以有多条操作语句，只有一条时可省略begin、end</span><br><span class="line">end</span><br><span class="line">//</span><br><span class="line">#sacetime为字段名</span><br></pre></td></tr></table></figure>
+
+<p>查看触发器：show triggers;</p>
+<p>删除触发器：drop trigger 触发器名；</p>
+<h2><span id="16-shi-jian">16.事件</span><a href="#16-shi-jian" class="header-anchor">#</a></h2><p><em>为了周期性地执行某一个命令或者sql语句</em></p>
+<h2><span id="17-bei-fen-yu-hui-fu">17.备份与恢复</span><a href="#17-bei-fen-yu-hui-fu" class="header-anchor">#</a></h2><h2><span id="18-xing-neng-you-hua">18.性能优化</span><a href="#18-xing-neng-you-hua" class="header-anchor">#</a></h2><h3><span id="1-fen-jie-biao">1.分解表</span><a href="#1-fen-jie-biao" class="header-anchor">#</a></h3><p>字段很多，且有些字段使用不频繁，可以将表分解成多个表</p>
+<h3><span id="2-zhong-jian-biao">2.中间表*</span><a href="#2-zhong-jian-biao" class="header-anchor">#</a></h3><p>需要经常查询两个表中的几个字段，可以建立中间表</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#将其他表的需要的记录导入中间表中</span><br><span class="line">insert into temp_score select student.id,student.name,score.grade from student,score where student.id = score.stu_id;</span><br></pre></td></tr></table></figure>
+
+<h3><span id="3-you-hua-cha-ru-ji-lu-de-su-du">3.优化插入记录的速度</span><a href="#3-you-hua-cha-ru-ji-lu-de-su-du" class="header-anchor">#</a></h3><p><em>索引，唯一性校验会影响插入记录的速度，根据需要如下操作</em></p>
+<p>禁用索引：alter table 表名 disable keys;</p>
+<p>重启索引：alter table 表名 enable keys;</p>
+<p>禁用唯一性检查：set unique_check=0;</p>
+<p>重启唯一性检查：set unique_check=1;</p>
+<p>优化insert语句</p>
+<p><em>一条insert语句插入多条记录比执行多条insert语句插入多条记录速度快，因为减少了与数据库之间的连接操作。</em></p>
+<h3><span id="4-biao-cao-zuo">4.表操作</span><a href="#4-biao-cao-zuo" class="header-anchor">#</a></h3><p>分析表：analyze table 表名</p>
+<p>检查表：check table 表名</p>
+<p><em>检查表是否存在错误</em></p>
+<p>优化表：optimize table 表名</p>
+<p><em>消除删除和更新造成的磁盘碎片，从而减少空间的浪费</em></p>
+<h3><span id="5-cha-xun-gao-su-huan-cun">5.查询高速缓存</span><a href="#5-cha-xun-gao-su-huan-cun" class="header-anchor">#</a></h3><p><em>首次查询，结果集会保存到高速缓存，再次执行相同查询可从高速缓存中检索</em></p>
+<p>检查高速缓存是否开启：show variables like ‘%query_cache%’</p>
+<h3><span id="6-you-hua-duo-biao-cha-xun">6.优化多表查询</span><a href="#6-you-hua-duo-biao-cha-xun" class="header-anchor">#</a></h3><p><em>子查询替代内连接</em></p>
+<h2><span id="19-quan-xian-guan-li-yu-an-quan">19.权限管理与安全</span><a href="#19-quan-xian-guan-li-yu-an-quan" class="header-anchor">#</a></h2>]]></content>
+  </entry>
+  <entry>
+    <title>Hexo+Github搭建个人博客</title>
+    <url>/2019/09/20/Hexo+Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p>使用github pages服务搭建博客的好处有：</p>
+<p>1.全是静态文件，访问速度快；<br>2.免费方便，不用花一分钱就可以搭建一个自由的个人博客，不需要服务器不需要后台；<br>3.可以随意绑定自己的域名，不仔细看的话根本看不出来你的网站是基于github的；<br>4.数据绝对安全，基于github的版本管理，想恢复到哪个历史版本都行；<br>5.博客内容可以轻松打包、转移、发布到其它平台；</p>
+<a id="more"></a>
+
+<h2><span id="bu-zou">步骤：</span><a href="#bu-zou" class="header-anchor">#</a></h2><h3><span id="1-an-zhuang-cheng-xu">1.安装程序</span><a href="#1-an-zhuang-cheng-xu" class="header-anchor">#</a></h3><p>1.安装<code>node.js</code>,<code>git</code>：官网下载最新版即可</p>
+<p>检查版本：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br><span class="line">git --version</span><br></pre></td></tr></table></figure>
+
+<p>2.安装hexo(win+r  cmd)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm insatll -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<h3><span id="2-github">2.GitHub</span><a href="#2-github" class="header-anchor">#</a></h3><p>1.注册（用户名，邮箱，密码）</p>
+<p>2.创建一个名为 <code>用户名.github.io</code> 的仓库，当你博客搭建成功时，域名就为 <code>https://用户名.github.io</code></p>
+<p>3.配置ssh key</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;邮箱&quot;</span><br></pre></td></tr></table></figure>
+
+<p>回车，第一个不用填，然后定义上传密码，也可以不填。</p>
+<p>打开电脑用户目录下的<code>.ssh\id_rsa.pub</code>文件，复制里面所有内容。</p>
+<p>打开GitHub主页，点头像，进入setting-&gt;SSH and GPG keys-&gt;New SSH key。</p>
+<p>粘贴你复制的内容到key里面，title随便填。</p>
+<p>4.测试连接</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+
+<p>5.配置信息</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global uesr.name &quot;用户名&quot;</span><br><span class="line">git config --global user.email &quot;邮箱&quot;</span><br></pre></td></tr></table></figure>
+
+<h3><span id="3-sheng-cheng-bo-ke">3.生成博客</span><a href="#3-sheng-cheng-bo-ke" class="header-anchor">#</a></h3><p>1.新建一个空文件夹，此文件夹为存放你博客的内容</p>
+<p>2.初始化</p>
+<p>进入此文件夹，鼠标右键<code>Git Bash Here</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+
+<p>3.生成</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+
+<p>4.启动服务</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<p>浏览器输入<code>localhost:40000</code>可本地查看你的博客，<code>ctrl+C</code>结束服务。</p>
+<h3><span id="4-bu-shu">4.部署</span><a href="#4-bu-shu" class="header-anchor">#</a></h3><p>1.安装插件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<p>2.修改配置信息</p>
+<p>打开此文件夹下<code>_config.yml</code>,配置drploy部分</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment">#注意前面每一个：后面有一个空格</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">	<span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">	<span class="attr">repository:</span> <span class="string">git@github.com:用户名/用户名.github.io.git</span></span><br><span class="line">	<span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+
+<p>3.上传</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<h2><span id="cuo-wu">错误：</span><a href="#cuo-wu" class="header-anchor">#</a></h2><p>1.安装插件<code>hexo-deployer-git</code>后，输入任意hexo指令出现：<code>RROR Plugin load failed: hexo-deployer-git</code></p>
+<p>原因：<code>node.js</code>版本太低，不支持该语法。安装高版本nodejs解决问题。</p>
+<p>2.<code>hexo d</code> 上传到GitHub上的库时出现：<code>fatal: Could not read from remote repository.</code></p>
+<p>原因：config.yml文件配置有误，正确格式为：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repository:</span> <span class="string">git@github.com:username/username.github.io.git</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+
+<h2><span id="xin-jian-wen-zhang">新建文章：</span><a href="#xin-jian-wen-zhang" class="header-anchor">#</a></h2><p>在此文件夹下</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">hexo new <span class="xml"><span class="tag">&lt;<span class="name">title</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>会在source目录下生成md文件，打开这个文件就能编写博客内容了。</p>
+<p>想在首页不显示所有内容:</p>
+<p>用<code>&lt;!--more--&gt;</code>区分，以上为首页显示的内容。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Spring</title>
+    <url>/2019/09/19/Spring/</url>
+    <content><![CDATA[<h3><span id="ioc">IOC</span><a href="#ioc" class="header-anchor">#</a></h3><p>IOC（Inversion Of Controll，控制反转）是一种设计思想，将原本在程序中手动创建对象的控制权，交由给Spring框架来管理。IOC容器是Spring用来实现IOC的载体，IOC容器实际上就是一个Map(key, value)，Map中存放的是各种对象。</p>
+<p>这样可以很大程度上简化应用的开发，把应用从复杂的依赖关系中解放出来。IOC容器就像是一个工厂，当需要创建一个对象，只需要配置好配置文件/注解即可，不用考虑对象是如何被创建出来的，大大增加了项目的可维护性且降低了开发难度。</p>
+<h3><span id="aop">AOP</span><a href="#aop" class="header-anchor">#</a></h3><p>AOP（Aspect-Oriented Programming，面向切面编程）能够将那些与业务无关，却为业务模块所共同调用的逻辑或责任（例如事务处理、日志管理、权限控制等）封装起来，便于减少系统的重复代码，降低模块间的耦合度，并有利于未来的可扩展性和可维护性。使用AOP之后我们可以把一些通用功能抽象出来，在需要用到的地方直接使用即可，这样可以大大简化代码量，提高了系统的扩展性。</p>
+<p>Spring AOP是基于动态代理的，如果要代理的对象实现了某个接口，那么Spring AOP就会使用JDK动态代理去创建代理对象；而对于没有实现接口的对象，就无法使用JDK动态代理，转而使用CGlib动态代理生成一个被代理对象的子类来作为代理。</p>
+<h3><span id="spring-aop-aspectj-aop-de-qu-bie">Spring AOP / AspectJ AOP 的区别？</span><a href="#spring-aop-aspectj-aop-de-qu-bie" class="header-anchor">#</a></h3><p>Spring AOP属于运行时增强，而AspectJ是编译时增强。</p>
+<p>Spring AOP基于代理（Proxying），而AspectJ基于字节码操作（Bytecode Manipulation）。</p>
+<p>AspectJ相比于Spring AOP功能更加强大，但是Spring AOP相对来说更简单。如果切面比较少，那么两者性能差异不大。但是，当切面太多的话，最好选择AspectJ，它比SpringAOP快很多。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2019/09/13/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2><span id="quick-start">Quick Start</span><a href="#quick-start" class="header-anchor">#</a></h2><h3><span id="create-a-new-post">Create a new post</span><a href="#create-a-new-post" class="header-anchor">#</a></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3><span id="run-server">Run server</span><a href="#run-server" class="header-anchor">#</a></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3><span id="generate-static-files">Generate static files</span><a href="#generate-static-files" class="header-anchor">#</a></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3><span id="deploy-to-remote-sites">Deploy to remote sites</span><a href="#deploy-to-remote-sites" class="header-anchor">#</a></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
+  </entry>
+</search>
