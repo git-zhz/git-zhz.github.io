@@ -3,10 +3,16 @@
   <entry>
     <title>test</title>
     <url>/2019/11/21/test/</url>
-    <content><![CDATA[<h1 id="测试1"><a href="#测试1" class="headerlink" title="测试1"></a>测试1</h1><p>测试测试测试</p>
-<h1 id="测试2"><a href="#测试2" class="headerlink" title="测试2"></a>测试2</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//test</span></span><br><span class="line"><span class="comment">//test</span></span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<p><img src="https://i.loli.net/2019/11/22/qBo6Demul2pIhvb.png" alt></p>
+<h2 id="此生无可恋，唯曲悦丹田"><a href="#此生无可恋，唯曲悦丹田" class="headerlink" title="此生无可恋，唯曲悦丹田"></a>此生无可恋，唯曲悦丹田</h2><p>一路向前 沿途美景无边</p>
+<p>义无反顾 理想无需多言</p>
+<p>再多考验 都会兑换成喜悦</p>
+<p>拼搏憧憬 为更美好的明天</p>
+<a id="more"></a>
 
-<h2 id="测试2-1"><a href="#测试2-1" class="headerlink" title="测试2.1"></a>测试2.1</h2><h3 id="测试2-1-1"><a href="#测试2-1-1" class="headerlink" title="测试2.1.1"></a>测试2.1.1</h3><h1 id="测试3"><a href="#测试3" class="headerlink" title="测试3"></a>测试3</h1>]]></content>
+<h2 id="测试2"><a href="#测试2" class="headerlink" title="测试2"></a>测试2</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//test</span></span><br><span class="line"><span class="comment">//test</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="测试2-1"><a href="#测试2-1" class="headerlink" title="测试2.1"></a>测试2.1</h3><h4 id="测试2-1-1"><a href="#测试2-1-1" class="headerlink" title="测试2.1.1"></a>测试2.1.1</h4><h2 id="测试3"><a href="#测试3" class="headerlink" title="测试3"></a>测试3</h2>]]></content>
       <categories>
         <category>基础</category>
       </categories>
@@ -294,20 +300,21 @@
 <h2 id="19-权限管理与安全"><a href="#19-权限管理与安全" class="headerlink" title="19.权限管理与安全"></a>19.权限管理与安全</h2>]]></content>
   </entry>
   <entry>
-    <title>Hexo+Github搭建个人博客</title>
-    <url>/2019/09/20/Hexo+Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p>使用github pages服务搭建博客的好处有：</p>
-<p>1.全是静态文件，访问速度快；<br>2.免费方便，不用花一分钱就可以搭建一个自由的个人博客，不需要服务器不需要后台；<br>3.可以随意绑定自己的域名，不仔细看的话根本看不出来你的网站是基于github的；<br>4.数据绝对安全，基于github的版本管理，想恢复到哪个历史版本都行；<br>5.博客内容可以轻松打包、转移、发布到其它平台；</p>
+    <title>Hexo+Github Pages+NexT搭建个人博客</title>
+    <url>/2019/09/20/Hexo+Github%20Pages+NexT%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p><img src="https://i.loli.net/2019/11/22/Up7gHf3Z6aqcisK.png" alt></p>
+<p>为什么使用Github Pages服务搭建博客：</p>
+<p>1.全是静态文件，访问速度快；<br>2.免费方便，不用花一分钱就可以搭建一个自由的个人博客，不需要服务器不需要后台；<br>3.可以随意绑定自己的域名，不仔细看的话根本看不出来你的网站是基于github的；<br>4.数据绝对安全，基于Github的版本管理，想恢复到哪个历史版本都行；<br>5.博客内容可以轻松打包、转移、发布到其它平台；</p>
 <a id="more"></a>
 
-<h2 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h2><h3 id="1-安装程序"><a href="#1-安装程序" class="headerlink" title="1.安装程序"></a>1.安装程序</h3><p>1.安装<code>node.js</code>,<code>git</code>：官网下载最新版即可</p>
+<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><h3 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h3><p>1.安装<code>node.js</code>,<code>git</code>：官网下载最新版即可</p>
 <p>检查版本：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br><span class="line">git --version</span><br></pre></td></tr></table></figure>
 
-<p>2.安装hexo(win+r  cmd)</p>
+<p>2.安装Hexo(win+r  cmd)</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm insatll -g hexo-cli</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-GitHub"><a href="#2-GitHub" class="headerlink" title="2.GitHub"></a>2.GitHub</h3><p>1.注册（用户名，邮箱，密码）</p>
+<h3 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h3><p>1.注册（用户名，邮箱，密码）</p>
 <p>2.创建一个名为 <code>用户名.github.io</code> 的仓库，当你博客搭建成功时，域名就为 <code>https://用户名.github.io</code></p>
 <p>3.配置ssh key</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;邮箱&quot;</span><br></pre></td></tr></table></figure>
@@ -322,7 +329,7 @@
 <p>5.配置信息</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global uesr.name &quot;用户名&quot;</span><br><span class="line">git config --global user.email &quot;邮箱&quot;</span><br></pre></td></tr></table></figure>
 
-<h3 id="3-生成博客"><a href="#3-生成博客" class="headerlink" title="3.生成博客"></a>3.生成博客</h3><p>1.新建一个空文件夹，此文件夹为存放你博客的内容</p>
+<h3 id="本地生成"><a href="#本地生成" class="headerlink" title="本地生成"></a>本地生成</h3><p>1.新建一个空文件夹，此文件夹为存放你博客的内容</p>
 <p>2.初始化</p>
 <p>进入此文件夹，鼠标右键<code>Git Bash Here</code></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
@@ -334,7 +341,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
 
 <p>浏览器输入<code>localhost:40000</code>可本地查看你的博客，<code>ctrl+C</code>结束服务。</p>
-<h3 id="4-部署"><a href="#4-部署" class="headerlink" title="4.部署"></a>4.部署</h3><p>1.安装插件</p>
+<h3 id="部署到Github"><a href="#部署到Github" class="headerlink" title="部署到Github"></a>部署到Github</h3><p>1.安装插件</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
 
 <p>2.修改配置信息</p>
@@ -344,19 +351,103 @@
 <p>3.上传</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
 
-<h2 id="错误："><a href="#错误：" class="headerlink" title="错误："></a>错误：</h2><p>1.安装插件<code>hexo-deployer-git</code>后，输入任意hexo指令出现：<code>RROR Plugin load failed: hexo-deployer-git</code></p>
+<h3 id="清理"><a href="#清理" class="headerlink" title="清理"></a>清理</h3><p>有时候部署失败，可以试一下以下代码把博客跟目录public文件夹删除再重新生成博客</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
+
+<h3 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h3><p>1.安装插件<code>hexo-deployer-git</code>后，输入任意hexo指令出现：<code>RROR Plugin load failed: hexo-deployer-git</code></p>
 <p>原因：<code>node.js</code>版本太低，不支持该语法。安装高版本nodejs解决问题。</p>
 <p>2.<code>hexo d</code> 上传到GitHub上的库时出现：<code>fatal: Could not read from remote repository.</code></p>
 <p>原因：config.yml文件配置有误，正确格式为：</p>
 <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repository:</span> <span class="string">git@github.com:username/username.github.io.git</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="新建文章："><a href="#新建文章：" class="headerlink" title="新建文章："></a>新建文章：</h2><p>在此文件夹下</p>
+<h3 id="配置站点信息"><a href="#配置站点信息" class="headerlink" title="配置站点信息"></a>配置站点信息</h3><p>修改根目录下的_config.yml文件，找到Site区域，修改成自己的信息</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Site</span><br><span class="line">title: #标题</span><br><span class="line">subtitle: #副标题</span><br><span class="line">description: #描述</span><br><span class="line">keywords: #关键词</span><br><span class="line">author: #作者</span><br><span class="line">language: #语言 简体中文：zh-CN</span><br><span class="line">timezone: #时区</span><br></pre></td></tr></table></figure>
+
+<h2 id="NexT"><a href="#NexT" class="headerlink" title="NexT"></a>NexT</h2><p>NexT使用文档：<a href>http://theme-next.iissnan.com/</a></p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>在博客的根目录执行以下代码，从Github上把master分支Clone下来</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
+
+<p>这样NexT主题的源码就会出现在博客根目录的themes/next文件夹下。</p>
+<p>然后修改博客根目录_config.yml文件，找到theme字段，修改为next即可</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+
+<p>重新部署即可显示结果</p>
+<h3 id="样式"><a href="#样式" class="headerlink" title="样式"></a>样式</h3><p>NexT内置了四个主题，可以根据自己喜好选择样式</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Schemes</span><br><span class="line">scheme: Muse</span><br><span class="line">#scheme: Mist</span><br><span class="line">#scheme: Pisces</span><br><span class="line">#scheme: Gemini</span><br></pre></td></tr></table></figure>
+
+<h3 id="站点图标"><a href="#站点图标" class="headerlink" title="站点图标"></a>站点图标</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">favicon:</span><br><span class="line">  small: /images/favicon.png</span><br><span class="line">  medium: /images/favicon.png</span><br><span class="line">  apple_touch_icon: /images/apple-touch-icon-next.png</span><br><span class="line">  safari_pinned_tab: /images/logo.svg</span><br></pre></td></tr></table></figure>
+
+<h3 id="头像"><a href="#头像" class="headerlink" title="头像"></a>头像</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">avatar:</span><br><span class="line">  url: /images/avatar.png</span><br><span class="line">  rounded: true #显示成圆形</span><br><span class="line">  rotated: false #头像旋转效果</span><br></pre></td></tr></table></figure>
+
+<h3 id="RSS"><a href="#RSS" class="headerlink" title="RSS"></a>RSS</h3><p>开启RSS订阅，要安装插件，在博客根目录下执行以下命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-feed --save</span><br></pre></td></tr></table></figure>
+
+<p>执行后无需其他配置就可以了。</p>
+<h3 id="代码框样式"><a href="#代码框样式" class="headerlink" title="代码框样式"></a>代码框样式</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">codeblock:</span><br><span class="line">  # 提供的样式有: normal | night | night eighties | night blue | night bright | solarized | solarized dark | galactic</span><br><span class="line">  highlight_theme: night eighties #在这里修改上面的样式代码</span><br><span class="line">  copy_button: #添加代码复制按钮</span><br><span class="line">    enable: false</span><br><span class="line">    show_result: false</span><br><span class="line">    # 按钮样式: default | flat | mac</span><br><span class="line">    style:</span><br></pre></td></tr></table></figure>
+
+<h3 id="回到顶部"><a href="#回到顶部" class="headerlink" title="回到顶部"></a>回到顶部</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">back2top:</span><br><span class="line">  enable: true #默认开启</span><br><span class="line">  # 按钮显示在侧栏下方</span><br><span class="line">  sidebar: false</span><br><span class="line">  # 显示阅读百分比</span><br><span class="line">  scrollpercent: false</span><br></pre></td></tr></table></figure>
+
+<h3 id="评论"><a href="#评论" class="headerlink" title="评论"></a>评论</h3><p>注册登录LeanCloud账号，创建应用，获得AppID和AppKey。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Valine</span><br><span class="line">valine:</span><br><span class="line">  enable: true #开启评论</span><br><span class="line">  appid:  #输入你获得的AppID</span><br><span class="line">  appkey:  #输入你获得的AppKey</span><br></pre></td></tr></table></figure>
+
+<h3 id="文章阅读量"><a href="#文章阅读量" class="headerlink" title="文章阅读量"></a>文章阅读量</h3><p>进入LeanCloud自己创建的应用，选择存储，新建Class名字为Count</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Valine</span><br><span class="line">valine:</span><br><span class="line">  visitor: true #开启文章阅读量显示</span><br></pre></td></tr></table></figure>
+
+<h3 id="pjax"><a href="#pjax" class="headerlink" title="pjax"></a>pjax</h3><p>pjax实现无刷新加载页面，推荐开启</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pjax: true</span><br></pre></td></tr></table></figure>
+
+<p>然后再next主题目录下安装依赖库</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/theme-next/theme-next-pjax source/lib/pjax</span><br></pre></td></tr></table></figure>
+
+<h2 id="菜单"><a href="#菜单" class="headerlink" title="菜单"></a>菜单</h2><h3 id="标签页"><a href="#标签页" class="headerlink" title="标签页"></a>标签页</h3><p>新增菜单选项</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br></pre></td></tr></table></figure>
+
+<p>执行这个命令后会在博客根目录生成souce/tags/index.md文件，内容是</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">title: tags #标题</span><br><span class="line">date: 2019-11-21 19:36:26</span><br></pre></td></tr></table></figure>
+
+<p>添加type字段指定页面类型，并关闭页面评论</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">type: tags</span><br><span class="line">comments: false</span><br></pre></td></tr></table></figure>
+
+<p>再修改主题目录下_config.yml文件的menu字段</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || home</span><br><span class="line">  about: /about/ || user</span><br><span class="line">  tags: /tags/ || tags</span><br><span class="line">  #categories: /categories/ || th</span><br><span class="line">  archives: /archives/ || archive</span><br><span class="line">  #schedule: /schedule/ || calendar</span><br><span class="line">  #sitemap: /sitemap.xml || sitemap</span><br><span class="line">  #commonweal: /404/ || heartbeat</span><br></pre></td></tr></table></figure>
+
+<h3 id="分类页"><a href="#分类页" class="headerlink" title="分类页"></a>分类页</h3><p>操作和标签页类似，将tags改成categories</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
+
+<p>执行这个命令后会在博客根目录生成souce/tags/index.md文件，内容是</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">title: categories #标题</span><br><span class="line">date: 2019-11-21 19:36:26</span><br></pre></td></tr></table></figure>
+
+<p>添加type字段指定页面类型，并关闭页面评论</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">type: categories</span><br><span class="line">comments: false</span><br></pre></td></tr></table></figure>
+
+<p>再修改主题目录下_config.yml文件的menu字段</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || home</span><br><span class="line">  about: /about/ || user</span><br><span class="line">  tags: /tags/ || tags</span><br><span class="line">  categories: /categories/ || th</span><br><span class="line">  archives: /archives/ || archive</span><br><span class="line">  #schedule: /schedule/ || calendar</span><br><span class="line">  #sitemap: /sitemap.xml || sitemap</span><br><span class="line">  #commonweal: /404/ || heartbeat</span><br></pre></td></tr></table></figure>
+
+<h3 id="搜索页"><a href="#搜索页" class="headerlink" title="搜索页"></a>搜索页</h3><p>先安装一个插件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+
+<p>然后再博客跟目录下的_config.yml里面添加搜索功能</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">search:</span><br><span class="line">  path: serach.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  limit: 10000</span><br></pre></td></tr></table></figure>
+
+<p>然后再主题目录的_config.yml里面开启</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">local_search:</span><br><span class="line">  enable: true</span><br></pre></td></tr></table></figure>
+
+<h2 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h2><h3 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h3><p>在此文件夹下</p>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">hexo new <span class="xml"><span class="tag">&lt;<span class="name">title</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 
 <p>会在source目录下生成md文件，打开这个文件就能编写博客内容了。</p>
-<p>想在首页不显示所有内容:</p>
-<p>用<code>&lt;!--more--&gt;</code>区分，以上为首页显示的内容。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">title: &quot;Hexo+Github Pages+NexT搭建个人博客&quot;</span><br><span class="line">date: 2019-09-20 21:38:47</span><br><span class="line">tags:  #以下格式添加标签和分类</span><br><span class="line">	- Hexo</span><br><span class="line">	- NexT</span><br><span class="line">categories:</span><br><span class="line">	- 博客</span><br></pre></td></tr></table></figure>
+
+<h3 id="阅读更多"><a href="#阅读更多" class="headerlink" title="阅读更多"></a>阅读更多</h3><p>想在首页不显示所有内容:直接在md文件中，用<code>&lt;!--more--&gt;</code>区分，以上为首页显示的内容。Hexo会自动生成更多按钮，点击进入全文。</p>
+<p>### </p>
 ]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+      </tags>
   </entry>
   <entry>
     <title>Spring</title>
