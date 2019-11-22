@@ -46,17 +46,17 @@
   };
 </script>
 
-  <meta name="description" content="异或#可逆 1.同为0，异为1 2.一个数，两次异或之后，是原数本身 “xxxxxx”异或一次：加密 “xxxxxx”再异或一次：解密 1234567891011121314151617public static String xor(String input)&amp;#123;    //把字符串变为字符数组    char[] cha = input.toCharArray();    //逐位异或">
+  <meta name="description" content="异或可逆 1.同为0，异为1 2.一个数，两次异或之后，是原数本身 “xxxxxx”异或一次：加密 “xxxxxx”再异或一次：解密 1234567891011121314151617public static String xor(String input)&amp;#123;    //把字符串变为字符数组    char[] cha = input.toCharArray();    //逐位异或">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java加密">
 <meta property="og:url" content="http://yoursite.com/2019/10/29/Java加密/index.html">
 <meta property="og:site_name" content="做一个傻子多么好">
-<meta property="og:description" content="异或#可逆 1.同为0，异为1 2.一个数，两次异或之后，是原数本身 “xxxxxx”异或一次：加密 “xxxxxx”再异或一次：解密 1234567891011121314151617public static String xor(String input)&amp;#123;    //把字符串变为字符数组    char[] cha = input.toCharArray();    //逐位异或">
+<meta property="og:description" content="异或可逆 1.同为0，异为1 2.一个数，两次异或之后，是原数本身 “xxxxxx”异或一次：加密 “xxxxxx”再异或一次：解密 1234567891011121314151617public static String xor(String input)&amp;#123;    //把字符串变为字符数组    char[] cha = input.toCharArray();    //逐位异或">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-10-29T00:46:27.475Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java加密">
-<meta name="twitter:description" content="异或#可逆 1.同为0，异为1 2.一个数，两次异或之后，是原数本身 “xxxxxx”异或一次：加密 “xxxxxx”再异或一次：解密 1234567891011121314151617public static String xor(String input)&amp;#123;    //把字符串变为字符数组    char[] cha = input.toCharArray();    //逐位异或">
+<meta name="twitter:description" content="异或可逆 1.同为0，异为1 2.一个数，两次异或之后，是原数本身 “xxxxxx”异或一次：加密 “xxxxxx”再异或一次：解密 1234567891011121314151617public static String xor(String input)&amp;#123;    //把字符串变为字符数组    char[] cha = input.toCharArray();    //逐位异或">
 
 <link rel="canonical" href="http://yoursite.com/2019/10/29/Java加密/">
 
@@ -271,19 +271,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2><span id="yi-huo">异或</span><a href="#yi-huo" class="header-anchor">#</a></h2><p>可逆</p>
+        <h2 id="异或"><a href="#异或" class="headerlink" title="异或"></a>异或</h2><p>可逆</p>
 <p>1.同为0，异为1</p>
 <p>2.一个数，两次异或之后，是原数本身</p>
 <p>“xxxxxx”异或一次：加密</p>
 <p>“xxxxxx”再异或一次：解密</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">xor</span><span class="params">(String input)</span></span>&#123;</span><br><span class="line">    <span class="comment">//把字符串变为字符数组</span></span><br><span class="line">    <span class="keyword">char</span>[] cha = input.toCharArray();</span><br><span class="line">    <span class="comment">//逐位异或</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;chs.length;i++)&#123;</span><br><span class="line">        chs[i] = (<span class="keyword">char</span>)(chs[i]^<span class="number">3000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//把字符数组变为字符串</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> String(chs);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		String str = <span class="string">"hello"</span>;</span><br><span class="line">		str = xor(str);</span><br><span class="line">		System.out.println(str);		</span><br><span class="line">		str = xor(str);</span><br><span class="line">		System.out.println(str);		</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2><span id="md5">MD5</span><a href="#md5" class="header-anchor">#</a></h2><p>不可逆，速度较快</p>
+<h2 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h2><p>不可逆，速度较快</p>
 <p>字符串（字节数组）–&gt;十六进制字符串</p>
 <p>引入commons-codec-1.9.jar</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">md5Encode</span><span class="params">(<span class="keyword">byte</span>[] input)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> DigestUtil.md5Hex(input);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">mian</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    String str = <span class="string">"hello"</span>;</span><br><span class="line">	str = md5Encode(str.getByte());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2><span id="sha256">SHA256</span><a href="#sha256" class="header-anchor">#</a></h2><p>不可逆，安全性较高</p>
+<h2 id="SHA256"><a href="#SHA256" class="headerlink" title="SHA256"></a>SHA256</h2><p>不可逆，安全性较高</p>
 <p>字符串（字节数组）–&gt;十六进制字符串</p>
 <p>引入commons-codec-1.9.jar</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">sha256Encode</span><span class="params">(<span class="keyword">byte</span>[] input)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> DigestUtil.sha256Hex(input);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">mian</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    String str = <span class="string">"hello"</span>;</span><br><span class="line">	str = md5Encode(str.getByte());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -351,7 +351,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">异或#</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">MD5#</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">SHA256#</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#异或"><span class="nav-number">1.</span> <span class="nav-text">异或</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MD5"><span class="nav-number">2.</span> <span class="nav-text">MD5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SHA256"><span class="nav-number">3.</span> <span class="nav-text">SHA256</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
