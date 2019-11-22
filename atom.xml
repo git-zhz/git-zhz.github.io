@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-11-22T02:12:18.439Z</updated>
+  <updated>2019-11-22T03:18:48.287Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2019/11/21/test/"/>
     <id>http://yoursite.com/2019/11/21/test/</id>
     <published>2019-11-21T11:33:59.000Z</published>
-    <updated>2019-11-22T02:12:18.439Z</updated>
+    <updated>2019-11-22T03:18:48.287Z</updated>
     
     <content type="html"><![CDATA[<h1><span id="ce-shi-1">测试1</span><a href="#ce-shi-1" class="header-anchor">#</a></h1><p>测试测试测试</p><h1><span id="ce-shi-2">测试2</span><a href="#ce-shi-2" class="header-anchor">#</a></h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//test</span></span><br><span class="line"><span class="comment">//test</span></span><br></pre></td></tr></table></figure><h2><span id="ce-shi-2-1">测试2.1</span><a href="#ce-shi-2-1" class="header-anchor">#</a></h2><h3><span id="ce-shi-2-1-1">测试2.1.1</span><a href="#ce-shi-2-1-1" class="header-anchor">#</a></h3><h1><span id="ce-shi-3">测试3</span><a href="#ce-shi-3" class="header-anchor">#</a></h1>]]></content>
     
@@ -39,7 +39,11 @@
       <category term="基础" scheme="http://yoursite.com/categories/%E5%9F%BA%E7%A1%80/"/>
     
     
-      <category term="mybatis java" scheme="http://yoursite.com/tags/mybatis-java/"/>
+      <category term="mybatis" scheme="http://yoursite.com/tags/mybatis/"/>
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="ssm" scheme="http://yoursite.com/tags/ssm/"/>
     
   </entry>
   
