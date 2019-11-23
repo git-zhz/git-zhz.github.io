@@ -1151,7 +1151,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff0f17;
+  background: #b3ff86;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2295,6 +2295,7 @@ embed {
   background: url("https://i.loli.net/2019/11/22/9mAh7YCSX6sojna.jpg");
   background-attachment: fixed;
   background-repeat: no-repeat;
+  background-size: cover;
 }
 .custom-logo .site-meta-headline {
   text-align: center;
