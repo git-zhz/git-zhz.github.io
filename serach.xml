@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>详解Java反射机制</title>
+    <title>json基础</title>
+    <url>/2019/11/24/json%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<p>json（javascrip Object Notation）：一个轻量级数据交换格式，能够替代xml的工作。</p>
+<p>json的数据格式比较简单，易于读写，格式都是压缩的，占用带宽小，易于解析。</p>
+]]></content>
+      <categories>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>json</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java反射基础</title>
     <url>/2019/11/23/%E8%AF%A6%E8%A7%A3Java%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/</url>
     <content><![CDATA[<p>反射（Reflection）机制是在<strong>运行状态</strong>中的Java程序对自身进行检查，并直接操作程序的内部<strong>属性</strong>和<strong>方法</strong>。</p>
 <p>对于任意一个类，都能知道这个类的所有属性和方法。</p>
@@ -73,8 +86,8 @@
       </categories>
   </entry>
   <entry>
-    <title>Java加密</title>
-    <url>/2019/10/29/Java%E5%8A%A0%E5%AF%86/</url>
+    <title>Java加密基础</title>
+    <url>/2019/10/29/Java%E5%8A%A0%E5%AF%86%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h2 id="异或"><a href="#异或" class="headerlink" title="异或"></a>异或</h2><p>可逆</p>
 <p>1.同为0，异为1</p>
 <p>2.一个数，两次异或之后，是原数本身</p>
