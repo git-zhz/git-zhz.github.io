@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-11-25T12:24:52.092Z</updated>
+  <updated>2019-11-30T04:36:51.011Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,68 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Maven入门与应用</title>
+    <link href="http://yoursite.com/2019/11/30/Maven%E5%85%A5%E9%97%A8%E4%B8%8E%E5%BA%94%E7%94%A8/"/>
+    <id>http://yoursite.com/2019/11/30/Maven%E5%85%A5%E9%97%A8%E4%B8%8E%E5%BA%94%E7%94%A8/</id>
+    <published>2019-11-30T03:17:32.000Z</published>
+    <updated>2019-11-30T04:36:51.011Z</updated>
+    
+    <content type="html"><![CDATA[<p>Maven是项目自动化构建工具，它有以下优点：</p><blockquote><p><strong>管理jar包</strong></p><blockquote><p>增加第三方jar包</p><p>管理jar包之间的依赖，它会自动将你新增的jar包所依赖的其它jar包导入</p></blockquote><p>将项目拆分成若干个模块</p></blockquote><a id="more"></a><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h3 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h3><p>1.进入Maven官网：<a href="https://maven.apache.org/download.cgi" target="_blank" rel="noopener">https://maven.apache.org/download.cgi</a></p><p>2.选择apache-maven-x.x.x-bin.zip （x.x.x为相应版本号）</p><p>3.解压缩–&gt;E:\apache-maven-x.x.x</p><h3 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h3><p>新建MAVEN_HOME：E:\apache-maven-x.x.x</p><p>编辑PATH：添加 %MAVEN_HOME%\bin</p><h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>1.Ctrl+r 输入cmd进入控制台</p><p>2.输入mvn -v 会显示Maven对应版本信息</p><h3 id="配置本地仓库"><a href="#配置本地仓库" class="headerlink" title="配置本地仓库"></a>配置本地仓库</h3><p>编辑 E:\apache-maven-3.6.3\conf\settings.xml</p><p>添加以下字段</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 新建文件夹E:\mvnrep为仓库路径 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">localRepository</span>&gt;</span>E:\mvnrep<span class="tag">&lt;/<span class="name">localRepository</span>&gt;</span></span><br></pre></td></tr></table></figure><h3 id="开发工具的设置"><a href="#开发工具的设置" class="headerlink" title="开发工具的设置"></a>开发工具的设置</h3><p>1.点击设置Window–&gt;Preferences–&gt;Maven ：</p><p>Installations–&gt;add : 选择Maven根目录E:\apache-maven-x.x.x</p><p><img src="https://img02.sogoucdn.com/app/a/100520146/77da8252ba5d416dbfde68bead847c0e" alt></p><p>User Settings–&gt;User Settings Browse : 选择Maven配置文件E:\apache-maven-3.6.3\conf\settings.xml，程序会自动识别并引用本地仓库</p><p><img src="https://img03.sogoucdn.com/app/a/100520146/5c5d8664cd8855c9e3c3aa7cb75e2582" alt></p><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="构建项目"><a href="#构建项目" class="headerlink" title="构建项目"></a>构建项目</h3><p>File–&gt;new–&gt;project–&gt;maven</p><p>选择webapp构建项目</p><h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><p>根目录：工程名</p><blockquote><p>src：源码</p><blockquote><p>main：存放主程序</p><blockquote><p>java：java源码文件</p><p>resource：存放框架的配置文件</p></blockquote><p>test：存放测试程序</p></blockquote><p><strong>pom.xml：maven的核心配置文件</strong></p></blockquote><h3 id="pom-xml"><a href="#pom-xml" class="headerlink" title="pom.xml"></a>pom.xml</h3><p>所有的构建配置都在这个文件里设置</p><p>以spring-context为例</p><p>使用下面坐标在中央仓库中唯一的定位一个maven工程</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.springframework/spring-context --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--1.公司或组织域名倒叙+项目名--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--2.模块名--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-context<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--3.版本号--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.1.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure><p>添加以上配置之后，程序会自动联网把对应jar包下载到本地仓库</p><h3 id="中央仓库"><a href="#中央仓库" class="headerlink" title="中央仓库"></a>中央仓库</h3><p>要使用任何jar包，只要进入中央仓库，搜索并复制相应坐标代码进pom.xml即可</p><p>Maven中央仓库地址：<a href="https://mvnrepository.com/" target="_blank" rel="noopener">https://mvnrepository.com/</a></p><p><img src="https://img03.sogoucdn.com/app/a/100520146/1ef9c8329526a256ba38afcdc32bc7b6" alt></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Maven是项目自动化构建工具，它有以下优点：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;管理jar包&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;增加第三方jar包&lt;/p&gt;
+&lt;p&gt;管理jar包之间的依赖，它会自动将你新增的jar包所依赖的其它jar包导入&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;将项目拆分成若干个模块&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="maven" scheme="http://yoursite.com/tags/maven/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring Boot</title>
+    <link href="http://yoursite.com/2019/11/28/Spring-Boot/"/>
+    <id>http://yoursite.com/2019/11/28/Spring-Boot/</id>
+    <published>2019-11-28T08:40:35.000Z</published>
+    <updated>2019-11-30T04:37:28.739Z</updated>
+    
+    <content type="html"><![CDATA[<p>要学习SpringBoot就要先了解微服务。</p><p>微服务：</p><p>将一个大项目中的每一个功能提取出来，独立成为一个项目，每一个子项目之间通过网络协议进行连接，每一个子项目就是一个微服务。</p><p>springboot：用于快速开发微服务模块。</p><p>1.简化j2ee的开发</p><p>2.整个spring技术栈的整合（整合springmvc，spring）</p><p>3.整个j2ee技术的整合（整合mybatis，redis）</p><a id="more"></a><p>准备：</p><p>jdk</p><p>maven</p><h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p>访问测试项目路径localhost:8080/XXX 后台抛出异常:This application has no explicit mapping for /error, so you are seeing this as a fallback. </p><p>抛出此异常表示访问的页面url没有匹配到对应的值，原因有如下三点： </p><p>Application启动类的位置不对：要将Application类放在最外侧，即包含所有子包 ，spring-boot会自动加载启动类所在包下及其子包下的所有组件。 </p><p>springboot的配置文件有误：关于application.yml或application.properties文件中视图解析器的配置问题。在pom文件下的spring-boot-starter-paren版本较高时使用以下配置：spring.mvc.view.prefix/spring.mvc.view.suffix，当pom文件下的spring-boot-starter-paren版本较低时使用以下配置：spring.view.prefix/spring.view.suffix。</p><p>控制器的url访问路径与注解@GetMapping（”/xxxx”）不匹配</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;要学习SpringBoot就要先了解微服务。&lt;/p&gt;
+&lt;p&gt;微服务：&lt;/p&gt;
+&lt;p&gt;将一个大项目中的每一个功能提取出来，独立成为一个项目，每一个子项目之间通过网络协议进行连接，每一个子项目就是一个微服务。&lt;/p&gt;
+&lt;p&gt;springboot：用于快速开发微服务模块。&lt;/p&gt;
+&lt;p&gt;1.简化j2ee的开发&lt;/p&gt;
+&lt;p&gt;2.整个spring技术栈的整合（整合springmvc，spring）&lt;/p&gt;
+&lt;p&gt;3.整个j2ee技术的整合（整合mybatis，redis）&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="框架" scheme="http://yoursite.com/categories/%E6%A1%86%E6%9E%B6/"/>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="springboot" scheme="http://yoursite.com/tags/springboot/"/>
+    
+  </entry>
   
   <entry>
     <title>JSON基础</title>
